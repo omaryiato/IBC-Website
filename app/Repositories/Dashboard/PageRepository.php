@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Repositories\Dashboard;
+
+use App\Models\Page;
+use App\Repositories\Dashboard\BaseRepository;
+
+class PageRepository
+{
+    public function getPageList()
+    {
+        return Page::with('sections.items')->get();
+    }
+
+    public function getPageDetails(int $id)
+    {
+        return Page::with('sections.items')->findOrFail($id);
+    }
+
+    public function addNewPage(array $page_request)
+    {
+        return Page::create($page_request);
+    }
+
+    public function updatePage(Page $page, array $page_request)
+    {
+        $page->update($page_request);
+        return $page;
+    }
+
+    public function deletePage(Page $page)
+    {
+        return $page->delete();
+    }
+}
