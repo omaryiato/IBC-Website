@@ -10,12 +10,12 @@ class SettingRepository
 
     public function getSettingsList()
     {
-        return Setting::with(['page','items','media'])->get();
+        return Setting::all();
     }
 
     public function getSettingById(int $id)
     {
-        return Setting::with(['page','items','media'])->findOrFail($id);
+        return Setting::findOrFail($id);
     }
 
 

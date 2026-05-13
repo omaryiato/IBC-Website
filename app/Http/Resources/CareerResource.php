@@ -23,6 +23,8 @@ class CareerResource extends JsonResource
             'employment_type' => $this->employment_type,
 
             'deadline' => $this->deadline,
+
+            'career_application' => CareerApplicationResource::collection($this->whenLoaded('applications')),
         ];
     }
 }
