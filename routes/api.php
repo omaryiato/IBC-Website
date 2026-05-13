@@ -62,7 +62,7 @@ Route::group(['prefix' => 'website'], function () {
 
         /***************************************** Pages *******************************************/
 
-            Route::apiResource('page', PageController::class);
+            Route::apiResource('pages', PageController::class);
 
         // /***************************************** Sections *******************************************/
 
@@ -74,15 +74,15 @@ Route::group(['prefix' => 'website'], function () {
 
         /***************************************** Blogs *******************************************/
 
-            Route::apiResource('blog', BlogController::class);
+            Route::apiResource('blogs', BlogController::class);
 
         /***************************************** Careers *******************************************/
 
-            Route::apiResource('career', CareerController::class);
+            Route::apiResource('careers', CareerController::class);
 
         /***************************************** Career Applications *******************************************/
 
-            Route::apiResource('career-application', CareerApplicationController::class);
+            Route::apiResource('career-applications', CareerApplicationController::class);
 
         /***************************************** Settings *******************************************/
 
@@ -90,7 +90,7 @@ Route::group(['prefix' => 'website'], function () {
 
         /***************************************** Contact Messages *******************************************/
 
-            Route::apiResource('contact-message', ContactMessageController::class);
+            Route::apiResource('contact-messages', ContactMessageController::class);
 
 });
 
