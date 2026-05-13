@@ -5,18 +5,15 @@ namespace App\Repositories\Dashboard;
 use App\Models\ContactMessage;
 use App\Repositories\Dashboard\BaseRepository;
 
-class ContactRepository extends BaseRepository
+class ContactMessageRepository
 {
-
-    public function __construct(ContactMessage $model)
+    public function getContactMessagesList()
     {
-        $this->model = $model;
+        return ContactMessage::all();
     }
 
-    public function unread()
+    public function getContactMessageById(int $id)
     {
-        return $this->model
-            ->where('is_read', false)
-            ->get();
+        return ContactMessage::findOrFail($id);
     }
 }

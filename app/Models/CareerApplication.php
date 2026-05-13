@@ -8,6 +8,8 @@ class CareerApplication extends Model
 {
     public $timestamps = false;
 
+    protected $table = "career_applications";
+
     protected $fillable = [
         'career_id',
         'full_name',

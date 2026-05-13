@@ -12,7 +12,7 @@ class ItemRepository
         return Item::with(['section','media'])->get();
     }
 
-    public function getItemDetails(int $id)
+    public function getItemById(int $id)
     {
         return Item::with(['section','media'])->findOrFail($id);
     }

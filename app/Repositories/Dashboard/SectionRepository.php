@@ -13,10 +13,11 @@ class SectionRepository
         return Section::with(['page','items','media'])->get();
     }
 
-    public function getSectionDetails(int $id)
+    public function getSectionById(int $id)
     {
         return Section::with(['page','items','media'])->findOrFail($id);
     }
+
 
     public function addNewSection(array $section_request)
     {

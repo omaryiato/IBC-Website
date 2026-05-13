@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Dashboard\SectionResource;
+use App\Http\Resources\SectionResource;
 use App\Services\Dashboard\SectionService;
 use Illuminate\Http\Request;
 
@@ -44,7 +44,7 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         try{
-            $section_details = $this->sectionService->createSection($request->all());
+            $section_details = $this->sectionService->addNewSection($request->all());
 
             return ResponseHelper::success(
                 new SectionResource($section_details),
@@ -61,7 +61,7 @@ class SectionController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            $section_details = $this->sectionService->updateSection($id, $request->all());
+            $section_details = $this->sectionService->updateSection($request->all(), $id);
 
             return ResponseHelper::success(
                 new SectionResource($section_details),

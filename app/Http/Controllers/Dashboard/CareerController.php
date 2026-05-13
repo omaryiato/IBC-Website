@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Dashboard\CareerResource;
+use App\Http\Resources\CareerResource;
 use App\Services\Dashboard\CareerService;
 use Illuminate\Http\Request;
 
@@ -16,8 +16,7 @@ class CareerController extends Controller
 
     public function index()
     {
-        $careers_list = $this->careerService
-                ->getCareersList();
+        $careers_list = $this->careerService->getCareersList();
 
         return ResponseHelper::success(
             CareerResource::collection($careers_list),
@@ -37,8 +36,7 @@ class CareerController extends Controller
     public function store(Request $request)
     {
         try{
-            $career_details = $this->careerService
-            ->createCareer($request->all());
+            $career_details = $this->careerService->addNewCareer($request->all());
 
             return ResponseHelper::success(
                 new CareerResource($career_details),
@@ -55,7 +53,7 @@ class CareerController extends Controller
     public function update(Request $request, int $id)
     {
         try{
-            $career_details = $this->careerService->updateCareer($id, $request->all());
+            $career_details = $this->careerService->updateCareer($request->all(), $id);
             return ResponseHelper::success(
                 new CareerResource($career_details),
                 "",

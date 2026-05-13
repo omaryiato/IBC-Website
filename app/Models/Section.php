@@ -9,6 +9,8 @@ class Section extends Model
 {
     use SoftDeletes;
 
+    protected $table = "sections";
+
     protected $fillable = [
         'page_id',
         'type',

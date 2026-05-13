@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Dashboard\BlogResource;
+use App\Http\Resources\BlogResource;
 use App\Services\Dashboard\BlogService;
 use Illuminate\Http\Request;
 
@@ -28,8 +28,7 @@ class BlogController extends Controller
 
     public function show(int $id)
     {
-        $blog_details = $this->blogService
-            ->getBlogById($id);
+        $blog_details = $this->blogService->getBlogById($id);
 
         if (!$blog_details) {
             return ResponseHelper::error($blog_details, "Blog not found!", 404);
@@ -60,8 +59,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         try{
-            $blog_details = $this->blogService
-            ->createBlog($request->all());
+            $blog_details = $this->blogService->addNewBlog($request->all());
 
             return ResponseHelper::success(
                 new BlogResource($blog_details),
@@ -78,7 +76,7 @@ class BlogController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            $blog_details = $this->blogService->updateBlog($id, $request->all());
+            $blog_details = $this->blogService->updateBlog($request->all(), $id);
 
             return ResponseHelper::success(
                 new BlogResource($blog_details),

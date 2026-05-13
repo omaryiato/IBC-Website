@@ -9,6 +9,8 @@ class Page extends Model
 {
     use SoftDeletes;
 
+    protected $table = "pages";
+
     protected $fillable = [
         'slug',
         'meta_title',

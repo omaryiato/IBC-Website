@@ -7,12 +7,12 @@ use App\Repositories\Dashboard\BaseRepository;
 
 class CareerRepository
 {
-    public function getCareerList()
+    public function getCareersList()
     {
         return Career::with('applications')->get();
     }
 
-    public function getCareerDetails(int $id)
+    public function getCareerById(int $id)
     {
         return Career::with('applications')->findOrFail($id);
     }

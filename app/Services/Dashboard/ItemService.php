@@ -12,12 +12,12 @@ class ItemService extends BaseService
 
     public function getItemsList()
     {
-        return $this->itemRepository->all();
+        return $this->itemRepository->getItemsList();
     }
 
     public function getItemById(int $id)
     {
-        $item_details = $this->itemRepository->findOrFail($id);
+        $item_details = $this->itemRepository->getItemById($id);
 
         if (!$item_details) {
             return null;
@@ -26,17 +26,19 @@ class ItemService extends BaseService
         return $item_details;
     }
 
-    public function createItem(array $item_request)
+    public function addNewItem(array $item_request)
     {
-        return $this->itemRepository->create($item_request);
+        return $this->itemRepository->addNewItem($item_request);
     }
 
-    public function updateItem(int $id, array $item_request)
+    public function updateItem(array $item_request, int $id)
     {
-        return $this->itemRepository->update($id, $item_request);
+        $item_details = $this->itemRepository->getItemById($id);
+        return $this->itemRepository->updateItem($item_details, $item_request);
     }
     public function deleteItem(int $id)
     {
-        return $this->itemRepository->delete($id);
+        $item_details = $this->itemRepository->getItemById($id);
+        return $this->itemRepository->deleteItem($item_details);
     }
 }

@@ -22,13 +22,9 @@ class SectionResource extends JsonResource
 
             'sort_order' => $this->sort_order,
 
-            'background_media' => new MediaResource(
-                $this->whenLoaded('media')
-            ),
+            'section_media' => new MediaResource($this->whenLoaded('media')),
 
-            'items' => ItemResource::collection(
-                $this->whenLoaded('items')
-            ),
+            'items' => ItemResource::collection($this->whenLoaded('items')),
         ];
     }
 }

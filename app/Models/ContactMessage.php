@@ -8,6 +8,8 @@ class ContactMessage extends Model
 {
     public $timestamps = false;
 
+    protected $table = "contact_messages";
+
     protected $fillable = [
         'full_name',
         'email',

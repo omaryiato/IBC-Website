@@ -12,29 +12,31 @@ class CareerService extends BaseService
 
     public function getCareersList()
     {
-        return $this->careerRepository->all();
+        return $this->careerRepository->getCareersList();
     }
 
     public function getCareerById(int $id)
     {
-        $career_details = $this->careerRepository->findOrFail($id);
+        $career_details = $this->careerRepository->getCareerById($id);
         if (!$career_details) {
             return null;
         }
         return $career_details;
     }
 
-    public function createCareer(array $career_request)
+    public function addNewCareer(array $career_request)
     {
-        return $this->careerRepository->create($career_request);
+        return $this->careerRepository->addNewCareer($career_request);
     }
 
-    public function updateCareer(int $id, array $career_request)
+    public function updateCareer(array $career_request, int $id)
     {
-        return $this->careerRepository->update($id, $career_request);
+        $career_details = $this->careerRepository->getCareerById($id);
+        return $this->careerRepository->updateCareer($career_details, $career_request);
     }
     public function deleteCareer(int $id)
     {
-        return $this->careerRepository->delete($id);
+        $career_details = $this->careerRepository->getCareerById($id);
+        return $this->careerRepository->deleteCareer($career_details);
     }
 }

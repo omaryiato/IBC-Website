@@ -12,12 +12,12 @@ class SectionService extends BaseService
 
     public function getSectionsList()
     {
-        return $this->sectionRepository->all();
+        return $this->sectionRepository->getSectionsList();
     }
 
     public function getSectionById(int $id)
     {
-        $section_details = $this->sectionRepository->findOrFail($id);
+        $section_details = $this->sectionRepository->getSectionById($id);
 
         if (!$section_details) {
             return null;
@@ -27,17 +27,19 @@ class SectionService extends BaseService
     }
 
 
-    public function createSection(array $section_request)
+    public function addNewSection(array $section_request)
     {
-        return $this->sectionRepository->create($section_request);
+        return $this->sectionRepository->addNewSection($section_request);
     }
 
-    public function updateSection(int $id, array $section_request)
+    public function updateSection(array $section_request, int $id)
     {
-        return $this->sectionRepository->update($id, $section_request);
+        $section_details = $this->sectionRepository->getSectionById($id);
+        return $this->sectionRepository->updateSection($section_details, $section_request);
     }
     public function deleteSection(int $id)
     {
-        return $this->sectionRepository->delete($id);
+        $section_details = $this->sectionRepository->getSectionById($id);
+        return $this->sectionRepository->deleteSection($section_details);
     }
 }

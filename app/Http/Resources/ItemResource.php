@@ -22,9 +22,7 @@ class ItemResource extends JsonResource
 
             'sort_order' => $this->sort_order,
 
-            'media' => new MediaResource(
-                $this->whenLoaded('media')
-            ),
+            'item_media' => new MediaResource($this->whenLoaded('media')),
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Dashboard\PageResource;
+use App\Http\Resources\PageResource;
 use App\Services\Dashboard\PageService;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,11 +17,14 @@ class PageController extends Controller
 
     public function index()
     {
-        $pages_list = $this->pageService->getActivePages();
+        $pages_list = $this->pageService->getPagesList();
 
         return ResponseHelper::success(
             PageResource::collection($pages_list),
-            "Pages Returned Successfully.",
+            [
+                "en" => "Pages Returned Successfully.",
+                "ar" => "تم ارجاع الصفحات بنجاح"
+            ],
             200
         );
     }
@@ -58,9 +61,7 @@ class PageController extends Controller
     public function store(Request $request)
     {
         try{
-            $page_details = $this->pageService->createPage(
-                $request->all()
-            );
+            $page_details = $this->pageService->addNewPage($request->all());
 
             return ResponseHelper::success(
                 new PageResource($page_details),
@@ -77,7 +78,7 @@ class PageController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            $page_details = $this->pageService->updatePage($id, $request->all());
+            $page_details = $this->pageService->updatePage($request->all(), $id);
 
             return ResponseHelper::success(
                 new PageResource($page_details),

@@ -9,6 +9,8 @@ class Item extends Model
 {
     use SoftDeletes;
 
+    protected $table = "items";
+
     protected $fillable = [
         'section_id',
         'title',

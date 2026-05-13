@@ -7,54 +7,138 @@ use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\ItemController;
 use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\CareerController;
-use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\Dashboard\CareerApplicationController;
 use App\Http\Controllers\Dashboard\MediaController;
+use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\ContactMessageController;
 
-Route::prefix('pages')->group(function () {
 
-    Route::get('/', [PageController::class, 'index']);
 
-    Route::get('{slug}', [PageController::class, 'show']);
 
-    Route::post('/', [PageController::class, 'store']);
+Route::group(['prefix' => 'dashboard'], function () {
+
+
+        /***************************************** Users *******************************************/
+
+            Route::apiResource('user', UserController::class);
+
+        /***************************************** Pages *******************************************/
+
+            Route::apiResource('page', PageController::class);
+
+        /***************************************** Sections *******************************************/
+
+            Route::apiResource('section', SectionController::class);
+
+        /***************************************** Items *******************************************/
+
+            Route::apiResource('item', ItemController::class);
+
+        /***************************************** Blogs *******************************************/
+
+            Route::apiResource('blog', BlogController::class);
+
+        /***************************************** Careers *******************************************/
+
+            Route::apiResource('career', CareerController::class);
+
+        /***************************************** Career Applications *******************************************/
+
+            Route::apiResource('career-application', CareerApplicationController::class);
+
+        /***************************************** Settings *******************************************/
+
+            Route::apiResource('setting', SettingController::class);
+
+        /***************************************** Contact Messages *******************************************/
+
+            Route::apiResource('contact-message', ContactMessageController::class);
+
 });
 
-Route::prefix('sections')->group(function () {
+Route::group(['prefix' => 'website'], function () {
 
-    Route::get('{pageId}', [SectionController::class, 'index']);
 
-    Route::post('/', [SectionController::class, 'store']);
+        /***************************************** Pages *******************************************/
+
+            Route::apiResource('page', PageController::class);
+
+        // /***************************************** Sections *******************************************/
+
+        //     Route::apiResource('section', SectionController::class);
+
+        // /***************************************** Items *******************************************/
+
+        //     Route::apiResource('item', ItemController::class);
+
+        /***************************************** Blogs *******************************************/
+
+            Route::apiResource('blog', BlogController::class);
+
+        /***************************************** Careers *******************************************/
+
+            Route::apiResource('career', CareerController::class);
+
+        /***************************************** Career Applications *******************************************/
+
+            Route::apiResource('career-application', CareerApplicationController::class);
+
+        /***************************************** Settings *******************************************/
+
+            // Route::apiResource('setting', SettingController::class);
+
+        /***************************************** Contact Messages *******************************************/
+
+            Route::apiResource('contact-message', ContactMessageController::class);
+
 });
 
-Route::prefix('items')->group(function () {
+// Route::prefix('pages')->group(function () {
 
-    Route::get('{sectionId}', [ItemController::class, 'index']);
+//     Route::get('/', [PageController::class, 'index']);
 
-    Route::post('/', [ItemController::class, 'store']);
-});
+//     Route::get('{slug}', [PageController::class, 'show']);
 
-Route::prefix('blogs')->group(function () {
+//     Route::post('/', [PageController::class, 'store']);
+// });
 
-    Route::get('/', [BlogController::class, 'index']);
+// Route::prefix('sections')->group(function () {
 
-    Route::get('{slug}', [BlogController::class, 'show']);
+//     Route::get('{pageId}', [SectionController::class, 'index']);
 
-    Route::post('/', [BlogController::class, 'store']);
-});
+//     Route::post('/', [SectionController::class, 'store']);
+// });
 
-Route::prefix('careers')->group(function () {
+// Route::prefix('items')->group(function () {
 
-    Route::get('/', [CareerController::class, 'index']);
+//     Route::get('{sectionId}', [ItemController::class, 'index']);
 
-    Route::post('/', [CareerController::class, 'store']);
-});
+//     Route::post('/', [ItemController::class, 'store']);
+// });
 
-Route::post(
-    'contact',
-    [ContactController::class, 'store']
-);
+// Route::prefix('blogs')->group(function () {
 
-Route::post(
-    'media/upload',
-    [MediaController::class, 'store']
-);
+//     Route::get('/', [BlogController::class, 'index']);
+
+//     Route::get('{slug}', [BlogController::class, 'show']);
+
+//     Route::post('/', [BlogController::class, 'store']);
+// });
+
+// Route::prefix('careers')->group(function () {
+
+//     Route::get('/', [CareerController::class, 'index']);
+
+//     Route::post('/', [CareerController::class, 'store']);
+// });
+
+// Route::post(
+//     'contact',
+//     [ContactController::class, 'store']
+// );
+
+// Route::post(
+//     'media/upload',
+//     [MediaController::class, 'store']
+// );

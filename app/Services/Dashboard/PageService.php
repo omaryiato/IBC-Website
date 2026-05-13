@@ -11,14 +11,14 @@ class PageService extends BaseService
         protected PageRepository $pageRepository
     ) {}
 
-    public function getAllPages()
+    public function getPagesList()
     {
-        return $this->pageRepository->all();
+        return $this->pageRepository->getPagesList();
     }
 
     public function getPageById(int $id)
     {
-        $page_details = $this->pageRepository->findOrFail($id);
+        $page_details = $this->pageRepository->getPageById($id);
 
         if (!$page_details) {
             return null;
@@ -37,22 +37,24 @@ class PageService extends BaseService
     //     return $page;
     // }
 
-    public function getActivePages()
+    // public function getActivePages()
+    // {
+    //     return $this->pageRepository->activePages();
+    // }
+
+    public function addNewPage(array $page_request)
     {
-        return $this->pageRepository->activePages();
+        return $this->pageRepository->addNewPage($page_request);
     }
 
-    public function createPage(array $page_request)
+    public function updatePage(array $page_request, int $id)
     {
-        return $this->pageRepository->create($page_request);
-    }
-
-    public function updatePage(int $id, array $page_request)
-    {
-        return $this->pageRepository->update($id, $page_request);
+        $page_details = $this->pageRepository->getPageById($id);
+        return $this->pageRepository->updatePage($page_details, $page_request);
     }
     public function deletePage(int $id)
     {
-        return $this->pageRepository->delete($id);
+        $page_details = $this->pageRepository->getPageById($id);
+        return $this->pageRepository->deletePage($page_details);
     }
 }

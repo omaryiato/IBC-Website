@@ -7,12 +7,12 @@ use App\Repositories\Dashboard\BaseRepository;
 
 class PageRepository
 {
-    public function getPageList()
+    public function getPagesList()
     {
         return Page::with('sections.items')->get();
     }
 
-    public function getPageDetails(int $id)
+    public function getPageById(int $id)
     {
         return Page::with('sections.items')->findOrFail($id);
     }

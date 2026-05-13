@@ -24,9 +24,7 @@ class BlogResource extends JsonResource
 
             'published_at' => $this->published_at,
 
-            'featured_image' => new MediaResource(
-                $this->whenLoaded('media')
-            ),
+            'blog_media' => new MediaResource($this->whenLoaded('media')),
         ];
     }
 }

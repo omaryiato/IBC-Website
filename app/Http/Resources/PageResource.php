@@ -18,9 +18,7 @@ class PageResource extends JsonResource
 
             'meta_description' => $this->meta_description,
 
-            'sections' => SectionResource::collection(
-                $this->whenLoaded('sections')
-            ),
+            'sections' => SectionResource::collection($this->whenLoaded('sections')),
         ];
     }
 }

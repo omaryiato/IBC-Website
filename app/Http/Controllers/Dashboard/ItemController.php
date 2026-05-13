@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Dashboard\ItemResource;
+use App\Http\Resources\ItemResource;
 use App\Services\Dashboard\ItemService;
 use Illuminate\Http\Request;
 
@@ -45,8 +45,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         try{
-            $item_details = $this->itemService
-            ->createItem($request->all());
+            $item_details = $this->itemService->addNewItem($request->all());
 
             return ResponseHelper::success(
                 new ItemResource($item_details),
@@ -63,7 +62,7 @@ class ItemController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            $item_details = $this->itemService->updateItem($id, $request->all());
+            $item_details = $this->itemService->updateItem($request->all(), $id);
 
             return ResponseHelper::success(
                 new ItemResource($item_details),

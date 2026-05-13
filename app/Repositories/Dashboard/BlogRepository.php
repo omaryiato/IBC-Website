@@ -7,12 +7,12 @@ use App\Repositories\Dashboard\BaseRepository;
 
 class BlogRepository
 {
-    public function getBlogList()
+    public function getBlogsList()
     {
         return Blog::with(['media', 'user'])->get();
     }
 
-    public function getBlogDetails(int $id)
+    public function getBlogById(int $id)
     {
         return Blog::with(['media', 'user'])->findOrFail($id);
     }
