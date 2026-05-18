@@ -59,7 +59,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         try{
-            $blog_details = $this->blogService->addNewBlog($request->all());
+            $blog_details = $this->blogService->addNewBlog($request);
 
             return ResponseHelper::success(
                 new BlogResource($blog_details),

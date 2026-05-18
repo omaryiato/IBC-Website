@@ -14,25 +14,25 @@ class MediaController extends Controller
         protected MediaService $mediaService
     ) {}
 
-    public function store(Request $request)
-    {
-        try{
-            // upload logic later
+    // public function store(Request $request)
+    // {
+    //     try{
+    //         // upload logic later
 
-            $media_details = $this->mediaService->upload([
-                'file_name' => 'example.webp',
-                'file_path' => 'uploads/example.webp',
-            ]);
+    //         $media_details = $this->mediaService->upload([
+    //             'file_name' => 'example.webp',
+    //             'file_path' => 'uploads/example.webp',
+    //         ]);
 
-            return ResponseHelper::success(
-                MediaResource::collection($media_details),
-                "Media sent Successfully.",
-                201
-            );
+    //         return ResponseHelper::success(
+    //             MediaResource::collection($media_details),
+    //             "Media sent Successfully.",
+    //             201
+    //         );
 
-        } catch(\Exception $exception){
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
-        }
+    //     } catch(\Exception $exception){
+    //         return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+    //     }
 
-    }
+    // }
 }

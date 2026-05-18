@@ -9,12 +9,12 @@ class ItemRepository
 {
     public function getItemsList()
     {
-        return Item::with(['section','media'])->get();
+        return Item::with(['section.media','media'])->get();
     }
 
     public function getItemById(int $id)
     {
-        return Item::with(['section','media'])->findOrFail($id);
+        return Item::with(['section.media','media'])->findOrFail($id);
     }
 
     public function addNewItem(array $item_request)

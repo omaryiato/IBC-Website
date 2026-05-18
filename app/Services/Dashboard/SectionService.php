@@ -3,11 +3,13 @@
 namespace App\Services\Dashboard;
 
 use App\Repositories\Dashboard\SectionRepository;
+use App\Services\Dashboard\MediaService;
 
 class SectionService extends BaseService
 {
     public function __construct(
-        protected SectionRepository $sectionRepository
+        protected SectionRepository $sectionRepository,
+        protected MediaService $mediaService
     ) {}
 
     public function getSectionsList()
@@ -27,8 +29,20 @@ class SectionService extends BaseService
     }
 
 
-    public function addNewSection(array $section_request)
+    public function addNewSection($request)
     {
+        $section_request = $request->all();
+
+        if ($request->hasFile('media')) {
+
+            $media_id = $this->mediaService->prepareMedia(
+                $request->file('media'),
+                'sections'
+            );
+
+            $section_request['media_id'] = $media_id;
+        }
+
         return $this->sectionRepository->addNewSection($section_request);
     }
 

@@ -10,12 +10,12 @@ class SectionRepository
 
     public function getSectionsList()
     {
-        return Section::with(['page','items','media'])->get();
+        return Section::with(['page','items.media','media'])->get();
     }
 
     public function getSectionById(int $id)
     {
-        return Section::with(['page','items','media'])->findOrFail($id);
+        return Section::with(['page','items.media','media'])->findOrFail($id);
     }
 
 

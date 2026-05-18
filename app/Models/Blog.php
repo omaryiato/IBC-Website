@@ -16,7 +16,7 @@ class Blog extends Model
         'title',
         'excerpt',
         'content',
-        'featured_media_id',
+        'media_id',
         'seo',
         'is_published',
         'published_at',
@@ -33,9 +33,20 @@ class Blog extends Model
         'published_at' => 'datetime',
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+
+            if (empty($model->published_at)) {
+                $model->published_at = now();
+            }
+
+        });
+    }
+
     public function media()
     {
-        return $this->belongsTo(Media::class, 'featured_media_id');
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     public function user()

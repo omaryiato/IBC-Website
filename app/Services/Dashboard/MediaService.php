@@ -3,20 +3,73 @@
 namespace App\Services\Dashboard;
 
 use App\Repositories\Dashboard\MediaRepository;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
-class MediaService extends BaseService
+class MediaService
 {
     public function __construct(
         protected MediaRepository $mediaRepository
     ) {}
 
-    public function upload(array $media_request)
+    public function prepareMedia(UploadedFile $file, string $folder = 'website_media'): int
     {
-        return $this->mediaRepository->create($media_request);
+        $media_name = $this->generateMediaName($file);
+
+        $original_name = $file->getClientOriginalName();
+        $mime_type     = $file->getMimeType();
+        $file_size     = $file->getSize();
+        $file_type     = $this->detectFileType($file);
+
+        $media_path = $this->uploadMediaFile($file, $media_name, $folder);
+
+        $media_details = $this->mediaRepository->addNewMedia([
+            'file_name'     => $media_name,
+            'original_name' => $original_name,
+            'file_path'     => $media_path,
+            'file_type'     => $file_type,
+            'mime_type'     => $mime_type,
+            'file_size'     => $file_size,
+        ]);
+
+        return $media_details['id'];
     }
 
-    public function getUserMedia(int $user_id)
+    protected function generateMediaName(UploadedFile $file): string
     {
-        return $this->mediaRepository->uploadByUser($user_id);
+        return time() . '_' .Str::random(10) . '.' .$file->getClientOriginalExtension();
+    }
+
+    protected function uploadMediaFile(UploadedFile $file,string $media_name,string $folder): string
+    {
+        $destination_path = public_path("documents/website_media/{$folder}");
+
+        if (!File::exists($destination_path)) {
+            File::makeDirectory($destination_path, 0755, true);
+        }
+
+        $file->move($destination_path, $media_name);
+
+        return "documents/{$folder}/{$media_name}";
+    }
+
+    protected function detectFileType(UploadedFile $file): string
+    {
+        $mime = $file->getMimeType();
+
+        if (str_contains($mime, 'image')) {
+            return 'image';
+        }
+
+        if (str_contains($mime, 'video')) {
+            return 'video';
+        }
+
+        if (str_contains($mime, 'pdf')) {
+            return 'document';
+        }
+
+        return 'file';
     }
 }

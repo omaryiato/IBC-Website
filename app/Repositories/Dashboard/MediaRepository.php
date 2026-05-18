@@ -6,17 +6,10 @@ namespace App\Repositories\Dashboard;
 use App\Models\Media;
 use App\Repositories\Dashboard\BaseRepository;
 
-class MediaRepository extends BaseRepository
+class MediaRepository
 {
-    public function __construct(Media $media)
+    public function addNewMedia(array $media_request)
     {
-        $this->model = $media;
-    }
-
-    public function uploadByUser(int $user_id)
-    {
-        return $this->model
-            ->where('uploaded_by', $user_id)
-            ->get();
+        return Media::create($media_request);
     }
 }

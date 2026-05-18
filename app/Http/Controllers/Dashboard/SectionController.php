@@ -44,7 +44,7 @@ class SectionController extends Controller
     public function store(Request $request)
     {
         try{
-            $section_details = $this->sectionService->addNewSection($request->all());
+            $section_details = $this->sectionService->addNewSection($request);
 
             return ResponseHelper::success(
                 new SectionResource($section_details),

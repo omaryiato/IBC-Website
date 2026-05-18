@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\MediaController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\ContactMessageController;
+use App\Http\Controllers\Website\MainController;
 
 
 
@@ -62,35 +63,24 @@ Route::group(['prefix' => 'website'], function () {
 
         /***************************************** Pages *******************************************/
 
-            Route::apiResource('pages', PageController::class);
-
-        // /***************************************** Sections *******************************************/
-
-        //     Route::apiResource('section', SectionController::class);
-
-        // /***************************************** Items *******************************************/
-
-        //     Route::apiResource('item', ItemController::class);
+            Route::GET('index', [MainController::class, 'ActivePages']);
+            // Route::apiResource('pages', PageController::class);
 
         /***************************************** Blogs *******************************************/
 
-            Route::apiResource('blogs', BlogController::class);
+            Route::GET('published-blogs', [MainController::class, 'PublishedBlogs']);
 
         /***************************************** Careers *******************************************/
 
-            Route::apiResource('careers', CareerController::class);
+            Route::GET('active-careers', [MainController::class, 'ActiveCareers']);
 
         /***************************************** Career Applications *******************************************/
 
-            Route::apiResource('career-applications', CareerApplicationController::class);
-
-        /***************************************** Settings *******************************************/
-
-            // Route::apiResource('setting', SettingController::class);
+            Route::POST('apply-job', [MainController::class, 'ApplyJobApplication']);
 
         /***************************************** Contact Messages *******************************************/
 
-            Route::apiResource('contact-messages', ContactMessageController::class);
+            Route::POST('contact-us', [MainController::class, 'ContactUs']);
 
 });
 

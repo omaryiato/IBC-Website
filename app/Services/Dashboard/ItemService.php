@@ -3,11 +3,14 @@
 namespace App\Services\Dashboard;
 
 use App\Repositories\Dashboard\ItemRepository;
+use App\Services\Dashboard\MediaService;
+
 
 class ItemService extends BaseService
 {
     public function __construct(
-        protected ItemRepository $itemRepository
+        protected ItemRepository $itemRepository,
+        protected MediaService $mediaService
     ) {}
 
     public function getItemsList()
@@ -26,8 +29,15 @@ class ItemService extends BaseService
         return $item_details;
     }
 
-    public function addNewItem(array $item_request)
+    public function addNewItem($request)
     {
+        $item_request = $request->all();
+        if ($request->hasFile('media')) {
+
+            $media_id = $this->mediaService->prepareMedia($request->file('media'),'items');
+
+            $item_request['media_id'] = $media_id;
+        }
         return $this->itemRepository->addNewItem($item_request);
     }
 

@@ -45,7 +45,7 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         try{
-            $item_details = $this->itemService->addNewItem($request->all());
+            $item_details = $this->itemService->addNewItem($request);
 
             return ResponseHelper::success(
                 new ItemResource($item_details),

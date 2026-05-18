@@ -3,12 +3,14 @@
 namespace App\Services\Dashboard;
 
 use App\Repositories\Dashboard\BlogRepository;
+use App\Services\Dashboard\MediaService;
 use Illuminate\Support\Str;
 
 class BlogService extends BaseService
 {
     public function __construct(
-        protected BlogRepository $blogRepository
+        protected BlogRepository $blogRepository,
+        protected MediaService $mediaService
     ) {}
 
     public function getBlogsList()
@@ -26,8 +28,15 @@ class BlogService extends BaseService
         return $blog_details;
     }
 
-    public function addNewBlog(array $blog_request)
+    public function addNewBlog($request)
     {
+        $blog_request = $request->all();
+        if ($request->hasFile('media')) {
+
+            $media_id = $this->mediaService->prepareMedia($request->file('media'),'blogs');
+
+            $blog_request['media_id'] = $media_id;
+        }
         return $this->blogRepository->addNewBlog($blog_request);
     }
 

@@ -18,6 +18,8 @@ class Media extends Model
         'uploaded_by',
     ];
 
+    public $timestamps = false;
+
     protected $casts = [
         'alt_text' => 'array',
     ];

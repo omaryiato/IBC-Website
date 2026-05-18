@@ -20,6 +20,7 @@ class Section extends Model
         'settings',
         'sort_order',
         'is_active',
+        'media_id',
         'created_by',
         'updated_by',
     ];
@@ -38,11 +39,11 @@ class Section extends Model
 
     public function media()
     {
-        return $this->belongsTo(Media::class, 'background_media_id');
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     public function items()
     {
-        return $this->hasMany(Item::class);
+        return $this->hasMany(Item::class, 'section_id', 'id');
     }
 }
