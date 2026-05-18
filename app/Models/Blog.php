@@ -31,6 +31,9 @@ class Blog extends Model
         'seo' => 'array',
         'is_published' => 'integer',
         'published_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     protected static function booted()

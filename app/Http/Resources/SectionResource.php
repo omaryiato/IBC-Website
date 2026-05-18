@@ -12,6 +12,10 @@ class SectionResource extends JsonResource
         return [
             'id' => $this->id,
 
+            'page_id' => $this->page_id,
+
+            'media_id' => $this->media_id,
+
             'type' => $this->type,
 
             'title' => $this->title,
@@ -21,6 +25,16 @@ class SectionResource extends JsonResource
             'settings' => $this->settings,
 
             'sort_order' => $this->sort_order,
+
+            'is_active' => $this->is_active,
+
+            'created_by' => $this->created_by,
+
+            'updated_by' => $this->updated_by,
+
+            'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
+            'deleted_at' => $this->deleted_at?->format('Y-m-d H:i:s'),
 
             'section_media' => new MediaResource($this->whenLoaded('media')),
 

@@ -22,6 +22,7 @@ class Media extends Model
 
     protected $casts = [
         'alt_text' => 'array',
+        'created_at' => 'datetime',
     ];
 
     public function user()

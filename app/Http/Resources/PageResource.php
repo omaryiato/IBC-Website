@@ -18,6 +18,16 @@ class PageResource extends JsonResource
 
             'meta_description' => $this->meta_description,
 
+            "is_active" => $this->is_active,
+
+            'created_by' => $this->created_by,
+
+            'updated_by' => $this->updated_by,
+
+            'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
+            'deleted_at' => $this->deleted_at?->format('Y-m-d H:i:s'),
+
             'sections' => SectionResource::collection($this->whenLoaded('sections')),
         ];
     }

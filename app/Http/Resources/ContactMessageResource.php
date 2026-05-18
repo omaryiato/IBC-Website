@@ -16,12 +16,14 @@ class ContactMessageResource extends JsonResource
 
             'email' => $this->email,
 
+            'subject' => $this->subject,
+
             'message' => $this->message,
 
             'is_read' => $this->is_read,
 
-            'created_at' => $this->created_at,
-            // 'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
+            // 'created_at' => $this->created_at,
+            'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
 
         ];
     }

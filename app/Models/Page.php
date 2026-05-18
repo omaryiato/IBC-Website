@@ -24,6 +24,9 @@ class Page extends Model
         'meta_title' => 'array',
         'meta_description' => 'array',
         'is_active' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function sections()

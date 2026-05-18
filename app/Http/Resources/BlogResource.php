@@ -22,8 +22,12 @@ class BlogResource extends JsonResource
 
             'seo' => $this->seo,
 
-            'published_at' => $this->published_at,
-            // 'published_at' => $this->published_at?->format('Y-m-d H:i:s'),
+            'media_id' => $this->media_id,
+
+            'is_published' => $this->is_published,
+
+            // 'published_at' => $this->published_at,
+            'published_at' => $this->published_at?->format('Y-m-d H:i:s'),
 
             'blog_media' => new MediaResource($this->whenLoaded('media')),
         ];

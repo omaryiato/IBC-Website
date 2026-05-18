@@ -16,7 +16,6 @@ class Section extends Model
         'type',
         'title',
         'description',
-        'background_media_id',
         'settings',
         'sort_order',
         'is_active',
@@ -30,6 +29,9 @@ class Section extends Model
         'description' => 'array',
         'settings' => 'array',
         'is_active' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function page()

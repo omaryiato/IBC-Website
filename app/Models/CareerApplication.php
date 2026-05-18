@@ -18,7 +18,11 @@ class CareerApplication extends Model
         'cv_file',
         'message',
     ];
-    
+
+    protected $casts = [
+        'created_at' => 'datetime',
+    ];
+
 
     public function career()
     {

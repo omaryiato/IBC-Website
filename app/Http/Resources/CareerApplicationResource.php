@@ -20,12 +20,12 @@ class CareerApplicationResource extends JsonResource
 
             'phone' => $this->phone,
 
-            'cv_file' => $this->cv_file,
+            'cv_file' => asset($this->cv_file),
 
             'message' => $this->message,
 
-            'created_at' => $this->created_at,
-            // 'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
+            // 'created_at' => $this->created_at,
+            'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
         ];
     }
 }

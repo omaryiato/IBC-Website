@@ -29,6 +29,9 @@ class Item extends Model
         'description' => 'array',
         'extra_data' => 'array',
         'is_active' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function section()

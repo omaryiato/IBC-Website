@@ -29,6 +29,9 @@ class Career extends Model
         'requirements' => 'array',
         'is_active' => 'integer',
         'deadline' => 'date',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function applications()

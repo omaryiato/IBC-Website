@@ -20,5 +20,6 @@ class ContactMessage extends Model
 
     protected $casts = [
         'is_read' => 'boolean',
+        'created_at' => 'datetime',
     ];
 }

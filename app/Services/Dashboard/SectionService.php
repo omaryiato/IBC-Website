@@ -49,7 +49,6 @@ class SectionService extends BaseService
     public function updateSection($request, int $id)
     {
         $section_request = $request->all();
-        dd($section_request);
         $section_details = $this->sectionRepository->getSectionById($id);
 
         if ($request->hasFile('media')) {

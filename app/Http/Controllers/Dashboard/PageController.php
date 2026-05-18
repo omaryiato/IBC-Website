@@ -19,6 +19,8 @@ class PageController extends Controller
     {
         $pages_list = $this->pageService->getPagesList();
 
+        // dd($pages_list);
+
         return ResponseHelper::success(
             PageResource::collection($pages_list),
             [
