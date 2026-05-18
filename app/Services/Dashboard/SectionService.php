@@ -46,11 +46,28 @@ class SectionService extends BaseService
         return $this->sectionRepository->addNewSection($section_request);
     }
 
-    public function updateSection(array $section_request, int $id)
+    public function updateSection($request, int $id)
     {
+        $section_request = $request->all();
+        dd($section_request);
         $section_details = $this->sectionRepository->getSectionById($id);
+
+        if ($request->hasFile('media')) {
+
+            if (!empty($section_details->media_id)) {
+                $this->mediaService->deleteMedia($section_details->media_id);
+            }
+
+
+            $media_id = $this->mediaService->prepareMedia($request->file('media'),'sections');
+
+            $section_request['media_id'] = $media_id;
+
+        }
+
         return $this->sectionRepository->updateSection($section_details, $section_request);
     }
+
     public function deleteSection(int $id)
     {
         $section_details = $this->sectionRepository->getSectionById($id);

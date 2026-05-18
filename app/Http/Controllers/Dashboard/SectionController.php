@@ -48,7 +48,7 @@ class SectionController extends Controller
 
             return ResponseHelper::success(
                 new SectionResource($section_details),
-                "Section Returned Successfully.",
+                "Section Added Successfully.",
                 201
             );
 
@@ -61,7 +61,7 @@ class SectionController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            $section_details = $this->sectionService->updateSection($request->all(), $id);
+            $section_details = $this->sectionService->updateSection($request, $id);
 
             return ResponseHelper::success(
                 new SectionResource($section_details),

@@ -18,6 +18,7 @@ class CareerApplication extends Model
         'cv_file',
         'message',
     ];
+    
 
     public function career()
     {

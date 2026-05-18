@@ -12,4 +12,13 @@ class MediaRepository
     {
         return Media::create($media_request);
     }
+
+    public function findById(int $media_id)
+    {
+        return Media::findOrFail($media_id);
+    }
+    public function delete(Media $media)
+    {
+        return $media->delete();
+    }
 }

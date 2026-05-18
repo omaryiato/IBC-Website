@@ -72,4 +72,15 @@ class MediaService
 
         return 'file';
     }
+
+    public function deleteMedia(int $media_id)
+    {
+        $media = $this->mediaRepository->findById($media_id);
+
+        if ($media && File::exists(public_path($media['file_path']))) {
+            File::delete(public_path($media['file_path']));
+        }
+
+        return $this->mediaRepository->delete($media);
+    }
 }

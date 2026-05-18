@@ -24,7 +24,8 @@ class CareerApplicationResource extends JsonResource
 
             'message' => $this->message,
 
-            'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
+            'created_at' => $this->created_at,
+            // 'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
         ];
     }
 }

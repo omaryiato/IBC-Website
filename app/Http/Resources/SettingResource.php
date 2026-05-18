@@ -20,9 +20,12 @@ class SettingResource extends JsonResource
 
             'updated_by' => $this->updated_by,
 
-            'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
-            'deleted_at' => $this->deleted_at?->format('Y-m-d H:i:s'),
+            'created_at' => $this->created_at,
+            // 'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
+            'updated_at' => $this->updated_at,
+            // 'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
+            'deleted_at' => $this->deleted_at,
+            // 'deleted_at' => $this->deleted_at?->format('Y-m-d H:i:s'),
         ];
     }
 }
