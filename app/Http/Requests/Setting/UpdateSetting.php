@@ -22,10 +22,17 @@ class UpdateSetting extends FormRequest
      */
     public function rules(): array
     {
-        return[
-            'key' => 'required|string|max:255|unique:settings,key',
+        $id = $this->route("setting");
+        
+        return [
+
+            'key' => 'required|string|max:255|unique:settings,key,' . $id,
 
             'value' => 'nullable|array',
+
+            'created_by' => 'required|integer|exists:users,id',
+
+            'updated_by' => 'required|integer|exists:users,id',
         ];
     }
 }

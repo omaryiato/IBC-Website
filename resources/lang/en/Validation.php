@@ -258,6 +258,37 @@ return [
     'contact_message_not_found' => 'Contact  message does not exist.',
     'get_contact_message_details' => 'Contact  message details successfully retrieved.',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Settings Validation
+    |--------------------------------------------------------------------------
+    */
+
+    'key' => [
+        'required' => 'Key field is required.',
+        'string'   => 'Key must be a valid string.',
+        'max'      => 'Key may not be greater than 255 characters.',
+        'unique'   => 'This key already exists.',
+    ],
+
+    'value' => [
+        'array' => 'Value must be an array.',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Settings Messages
+    |--------------------------------------------------------------------------
+    */
+
+    'get_settings_list' => 'Settings list successfully retrieved.',
+    'setting_not_found' => 'Setting does not exist.',
+    'get_setting_details' => 'Setting details successfully retrieved.',
+
+    'add_new_setting' => 'Setting added successfully.',
+    'update_setting' => 'Setting updated successfully.',
+    'delete_setting' => 'Setting deleted successfully.',
+
 
 ];
 

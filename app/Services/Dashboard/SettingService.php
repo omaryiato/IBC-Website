@@ -35,11 +35,21 @@ class SettingService extends BaseService
     public function updateSetting(array $setting_request, int $id)
     {
         $setting_details = $this->settingRepository->getSettingById($id);
+
+        if (!$setting_details) {
+            return null;
+        }
+
         return $this->settingRepository->updateSetting($setting_details, $setting_request);
     }
     public function deleteSetting(int $id)
     {
         $setting_details = $this->settingRepository->getSettingById($id);
+
+        if (!$setting_details) {
+            return null;
+        }
+
         return $this->settingRepository->deleteSetting($setting_details);
     }
 }

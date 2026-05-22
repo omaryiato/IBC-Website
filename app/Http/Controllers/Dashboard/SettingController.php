@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Setting\AddNewSetting;
+use App\Http\Requests\Setting\UpdateSetting;
 use App\Http\Resources\SettingResource;
 use App\Services\Dashboard\SettingService;
 use Exception;
@@ -22,8 +24,8 @@ class SettingController extends Controller
         return ResponseHelper::success(
             SettingResource::collection($settings_list),
             [
-                "en" => "Settings Returned Successfully.",
-                "ar" => "تم ارجاع الصفحات بنجاح"
+                'en' => __('validation.get_settings_list'),
+                'ar' => __('validation.get_settings_list'),
             ],
             200
         );
@@ -34,45 +36,82 @@ class SettingController extends Controller
         $setting_details = $this->settingService->getSettingById($id);
 
         if (!$setting_details) {
-            return ResponseHelper::error($setting_details, "Setting not found!", 404);
+            return ResponseHelper::error(
+                $setting_details,
+                [
+                    'en' => __('validation.setting_not_found'),
+                    'ar' => __('validation.setting_not_found'),
+                ],
+                404);
         }
 
         return ResponseHelper::success(
             new SettingResource($setting_details),
-            "Setting Returned Successfully.",
+            [
+                'en' => __('validation.get_setting_details'),
+                'ar' => __('validation.get_setting_details'),
+            ],
             200
         );
     }
 
-    public function store(Request $request)
+    public function store(AddNewSetting $request)
     {
         try{
             $setting_details = $this->settingService->addNewSetting($request->all());
 
             return ResponseHelper::success(
                 new SettingResource($setting_details),
-                "Setting created successfully.",
+                [
+                    'en' => __('validation.add_new_setting'),
+                    'ar' => __('validation.add_new_setting'),
+                ],
                 201
             );
 
         } catch(Exception $exception){
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
 
     }
 
-    public function update(Request $request, int $id)
+    public function update(UpdateSetting $request, int $id)
     {
         try {
             $setting_details = $this->settingService->updateSetting($request->all(), $id);
 
+            if (!$setting_details) {
+                return ResponseHelper::error(
+                    $setting_details,
+                    [
+                        'en' => __('validation.setting_not_found'),
+                        'ar' => __('validation.setting_not_found'),
+                    ],
+                    404);
+            }
+
             return ResponseHelper::success(
                 new SettingResource($setting_details),
-                "Setting Updated Successfully.",
+                [
+                    'en' => __('validation.update_setting'),
+                    'ar' => __('validation.update_setting'),
+                ],
                 201
             );
         } catch (Exception $exception) {
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
     }
 
@@ -80,11 +119,33 @@ class SettingController extends Controller
     public function destroy(int $id)
     {
         try {
-            $this->settingService->deleteSetting($id);
+            $setting_details = $this->settingService->deleteSetting($id);
 
-            return ResponseHelper::success(null, "Setting Deleted Successfully", 200);
+            if (!$setting_details) {
+                return ResponseHelper::error(
+                    $setting_details,
+                    [
+                        'en' => __('validation.setting_not_found'),
+                        'ar' => __('validation.setting_not_found'),
+                    ],
+                    404);
+            }
+
+            return ResponseHelper::success(
+                null,
+                [
+                    'en' => __('validation.delete_setting'),
+                    'ar' => __('validation.delete_setting'),
+                ],
+                200);
         } catch (Exception $exception) {
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
     }
 }
