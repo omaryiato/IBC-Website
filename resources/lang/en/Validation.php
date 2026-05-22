@@ -35,8 +35,12 @@ return [
     'page_status_integer' => 'Page Status must be integer.',
     'page_status_in' => 'Page Status must be (1 or 0).',
 
-    'add_new_page' => 'Page (:page_en_name) added successfully.',
-    'update_page' => 'Page (:page_en_name) updated successfully.',
+    'get_pages_list' => 'Pages list successfully retrieved.',
+    'page_not_found' => 'This page does not exist.',
+    'get_pages_details' => 'Pages list successfully retrieved.',
+
+    'add_new_page' => 'Page (:page_name) added successfully.',
+    'update_page' => 'Page (:page_name) updated successfully.',
     'delete_page' => 'Page (:page_id) inactive successfully.',
 
 // Features Validation

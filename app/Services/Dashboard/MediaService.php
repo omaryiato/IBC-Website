@@ -38,7 +38,18 @@ class MediaService
 
     protected function generateMediaName(UploadedFile $file): string
     {
-        return time() . '_' .Str::random(10) . '.' .$file->getClientOriginalExtension();
+        $original_name = pathinfo(
+            $file->getClientOriginalName(),
+            PATHINFO_FILENAME
+        );
+
+        $original_name = str_replace(' ', '_', $original_name);
+
+        $date = now()->format('d-M-Y');
+
+        $extension = $file->getClientOriginalExtension();
+
+        return "{$original_name}_{$date}.{$extension}";
     }
 
     protected function uploadMediaFile(UploadedFile $file,string $media_name,string $folder): string

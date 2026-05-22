@@ -44,7 +44,7 @@ class PageService extends BaseService
 
     public function addNewPage(array $page_request)
     {
-        return $this->pageRepository->addNewPage($page_request);
+        return $this->pageRepository->addNewPage($this->preparePageDetails($page_request));
     }
 
     public function updatePage(array $page_request, int $id)
@@ -56,5 +56,15 @@ class PageService extends BaseService
     {
         $page_details = $this->pageRepository->getPageById($id);
         return $this->pageRepository->deletePage($page_details);
+    }
+
+    public function preparePageDetails(array $page_request){
+        return  [
+            'slug' => $page_request->slug,
+            'title' => json_decode($page_request->title, true),
+            'excerpt' => json_decode($page_request->excerpt, true),
+            'content' => json_decode($page_request->content, true),
+            'seo' => json_decode($page_request->seo, true),
+        ];
     }
 }
