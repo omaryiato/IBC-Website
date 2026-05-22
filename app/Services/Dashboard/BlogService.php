@@ -45,6 +45,10 @@ class BlogService extends BaseService
         $blog_request = $request->all();
         $blog_details = $this->blogRepository->getBlogById($id);
 
+        if (!$blog_details) {
+            return null;
+        }
+
         if ($request->hasFile('media')) {
 
             if (!empty($blog_details->media_id)) {
@@ -63,6 +67,11 @@ class BlogService extends BaseService
     public function deleteBlog(int $id)
     {
         $blog_details = $this->blogRepository->getBlogById($id);
+
+        if (!$blog_details) {
+            return null;
+        }
+        
         return $this->blogRepository->deleteBlog($blog_details);
     }
 

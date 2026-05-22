@@ -22,11 +22,16 @@ class AddNewSection extends FormRequest
      */
     public function rules(): array
     {
+        // Section Request Validation Rules
+
         return [
+
             'page_id' => 'required|integer|exists:pages,id',
+
             'type' => 'required|string|max:100',
 
             'title' => 'nullable|array',
+
             'description' => 'nullable|array',
 
             'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:10240',
@@ -36,6 +41,10 @@ class AddNewSection extends FormRequest
             'sort_order' => 'nullable|integer|min:0',
 
             'is_active' => 'nullable|in:0,1',
+
+            'created_by' => 'required|integer|exists:users,id',
+
+            'updated_by' => 'required|integer|exists:users,id',
         ];
     }
 }

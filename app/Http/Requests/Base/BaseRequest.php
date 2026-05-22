@@ -20,7 +20,7 @@ class BaseRequest extends FormRequest
         }
 
         $translation_key = $field && $rule
-            ? 'validation.' . $field . '_' . $rule
+            ? 'validation.' . $field . '.' . $rule
             : null;
 
         $response_message = [

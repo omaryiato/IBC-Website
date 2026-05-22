@@ -21,8 +21,8 @@ class ContactMessageController extends Controller
         return ResponseHelper::success(
             ContactMessageResource::collection($contact_messages_list),
             [
-                "en" => "ContactMessages Returned Successfully.",
-                "ar" => "تم ارجاع الصفحات بنجاح"
+                'en' => __('validation.get_contact_messages_list'),
+                'ar' => __('validation.get_contact_messages_list'),
             ],
             200
         );
@@ -33,12 +33,21 @@ class ContactMessageController extends Controller
         $contact_message_details = $this->contactMessageService->getContactMessageById($id);
 
         if (!$contact_message_details) {
-            return ResponseHelper::error($contact_message_details, "ContactMessage not found!", 404);
+            return ResponseHelper::error(
+                $contact_message_details,
+                [
+                    'en' => __('validation.contact_message_not_found'),
+                    'ar' => __('validation.contact_message_not_found'),
+                ],
+                404);
         }
 
         return ResponseHelper::success(
             new ContactMessageResource($contact_message_details),
-            "ContactMessage Returned Successfully.",
+            [
+                'en' => __('validation.get_contact_message_details'),
+                'ar' => __('validation.get_contact_message_details'),
+            ],
             200
         );
     }

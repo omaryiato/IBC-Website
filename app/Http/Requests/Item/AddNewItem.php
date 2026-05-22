@@ -22,7 +22,10 @@ class AddNewItem extends FormRequest
      */
     public function rules(): array
     {
+        // Item Request Validation Rules
+
         return [
+
             'section_id' => 'required|integer|exists:sections,id',
 
             'title' => 'nullable|array',
@@ -38,6 +41,10 @@ class AddNewItem extends FormRequest
             'sort_order' => 'nullable|integer|min:0',
 
             'is_active' => 'nullable|in:0,1',
+
+            'created_by' => 'required|integer|exists:users,id',
+
+            'updated_by' => 'required|integer|exists:users,id',
         ];
     }
 }

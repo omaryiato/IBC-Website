@@ -27,6 +27,8 @@ class AddNewPage extends FormRequest
             'meta_title' => 'nullable|array',
             'meta_description' => 'nullable|array',
             'is_active' => 'nullable|in:0,1',
+            'created_by' => 'required|integer|exists:users,id',
+            'updated_by' => 'required|integer|exists:users,id',
         ];
     }
 }

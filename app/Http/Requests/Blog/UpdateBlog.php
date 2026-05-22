@@ -22,8 +22,10 @@ class UpdateBlog extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route("blog");
         return [
-            'slug' => 'required|string|max:255|unique:blogs,slug',
+
+            'slug' => 'required|string|max:255|unique:blogs,slug,' . $id,
 
             'title' => 'required|array',
 
@@ -38,6 +40,10 @@ class UpdateBlog extends FormRequest
             'is_published' => 'nullable|in:0,1',
 
             'published_at' => 'nullable|date',
+
+            'created_by' => 'required|integer|exists:users,id',
+
+            'updated_by' => 'required|integer|exists:users,id',
         ];
     }
 }

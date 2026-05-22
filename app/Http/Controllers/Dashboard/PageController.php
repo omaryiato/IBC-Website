@@ -24,10 +24,8 @@ class PageController extends Controller
         return ResponseHelper::success(
             PageResource::collection($pages_list),
             [
-                'en' => __('validation.get_pages_list', [
-                ], 'en'),
-                'ar' => __('validation.get_pages_list', [
-                ], 'ar'),
+                'en' => __('validation.get_pages_list'),
+                'ar' => __('validation.get_pages_list'),
             ],
             200
         );
@@ -41,10 +39,8 @@ class PageController extends Controller
             return ResponseHelper::error(
                 $page_details,
                 [
-                    'en' => __('validation.page_not_found', [
-                    ], 'en'),
-                    'ar' => __('validation.page_not_found', [
-                    ], 'ar'),
+                    'en' => __('validation.page_not_found'),
+                    'ar' => __('validation.page_not_found'),
                 ],
                 404);
         }
@@ -52,10 +48,8 @@ class PageController extends Controller
         return ResponseHelper::success(
             new PageResource($page_details),
             [
-                'en' => __('validation.get_pages_details', [
-                ], 'en'),
-                'ar' => __('validation.get_pages_details', [
-                ], 'ar'),
+                'en' => __('validation.get_page_details'),
+                'ar' => __('validation.get_page_details'),
             ],
             200
         );
@@ -83,18 +77,20 @@ class PageController extends Controller
             return ResponseHelper::success(
                 new PageResource($page_details),
                 [
-                    'en' => __('validation.add_new_page', [
-                        'page_name' => $request->slug
-                    ], 'en'),
-                    'ar' => __('validation.add_new_page', [
-                        'page_name' => $request->slug
-                    ], 'ar'),
+                    'en' => __('validation.add_new_page'),
+                    'ar' => __('validation.add_new_page'),
                 ],
                 201
             );
 
         } catch(Exception $exception){
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
 
     }
@@ -104,20 +100,32 @@ class PageController extends Controller
         try {
             $page_details = $this->pageService->updatePage($request->all(), $id);
 
+            if (!$page_details) {
+                return ResponseHelper::error(
+                    $page_details,
+                    [
+                        'en' => __('validation.page_not_found'),
+                        'ar' => __('validation.page_not_found'),
+                    ],
+                    404);
+            }
+
             return ResponseHelper::success(
                 new PageResource($page_details),
                 [
-                    'en' => __('validation.update_page', [
-                        'page_name' => $request->slug
-                    ], 'en'),
-                    'ar' => __('validation.update_page', [
-                        'page_name' => $request->slug
-                    ], 'ar'),
+                    'en' => __('validation.update_page'),
+                    'ar' => __('validation.update_page'),
                 ],
                 201
             );
         } catch (Exception $exception) {
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
     }
 
@@ -125,20 +133,32 @@ class PageController extends Controller
     public function destroy(int $id)
     {
         try {
-            $this->pageService->deletePage($id);
+            $page_details = $this->pageService->deletePage($id);
+
+            if (!$page_details) {
+                return ResponseHelper::error(
+                    $page_details,
+                    [
+                        'en' => __('validation.page_not_found'),
+                        'ar' => __('validation.page_not_found'),
+                    ],
+                    404);
+            }
 
             return ResponseHelper::success(null,
             [
-                'en' => __('validation.delete_page', [
-                    'page_id' => $id
-                ], 'en'),
-                'ar' => __('validation.delete_page', [
-                    'page_id' => $id
-                ], 'ar'),
+                'en' => __('validation.delete_page'),
+                'ar' => __('validation.delete_page'),
             ],
             200);
         } catch (Exception $exception) {
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
     }
 }

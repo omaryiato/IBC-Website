@@ -22,8 +22,9 @@ class UpdatePage extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route("page");
         return [
-            'slug' => 'required|string|max:255|unique:pages,slug',
+            'slug' => 'required|string|max:255|unique:pages,slug,' . $id,
             'meta_title' => 'nullable|array',
             'meta_description' => 'nullable|array',
             'is_active' => 'nullable|in:0,1',

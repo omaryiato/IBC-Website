@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Blog\AddNewBlog;
+use App\Http\Requests\Blog\UpdateBlog;
 use App\Http\Resources\BlogResource;
 use App\Services\Dashboard\BlogService;
 use Illuminate\Http\Request;
@@ -20,7 +22,10 @@ class BlogController extends Controller
 
         return ResponseHelper::success(
             BlogResource::collection($blogs_list),
-            "Blogs Returned Successfully.",
+            [
+                'en' => __('validation.get_blogs_list'),
+                'ar' => __('validation.get_blogs_list'),
+            ],
             200
         );
 
@@ -31,12 +36,21 @@ class BlogController extends Controller
         $blog_details = $this->blogService->getBlogById($id);
 
         if (!$blog_details) {
-            return ResponseHelper::error($blog_details, "Blog not found!", 404);
+            return ResponseHelper::error(
+                $blog_details,
+                [
+                    'en' => __('validation.blog_not_found'),
+                    'ar' => __('validation.blog_not_found'),
+                ],
+                404);
         }
 
         return ResponseHelper::success(
             new BlogResource($blog_details),
-            "Blogs Returned Successfully.",
+            [
+                'en' => __('validation.get_blog_details'),
+                'ar' => __('validation.get_blog_details'),
+            ],
             200
         );
     }
@@ -56,35 +70,63 @@ class BlogController extends Controller
     //     );
     // }
 
-    public function store(Request $request)
+    public function store(AddNewBlog $request)
     {
         try{
             $blog_details = $this->blogService->addNewBlog($request);
 
             return ResponseHelper::success(
                 new BlogResource($blog_details),
-                "Blogs Created Successfully.",
+                [
+                    'en' => __('validation.add_new_blog'),
+                    'ar' => __('validation.add_new_blog'),
+                ],
                 201
             );
 
         } catch(\Exception $exception){
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
 
     }
 
-    public function update(Request $request, int $id)
+    public function update(UpdateBlog $request, int $id)
     {
         try {
             $blog_details = $this->blogService->updateBlog($request, $id);
 
+            if (!$blog_details) {
+                return ResponseHelper::error(
+                    $blog_details,
+                    [
+                        'en' => __('validation.blog_not_found'),
+                        'ar' => __('validation.blog_not_found'),
+                    ],
+                    404);
+            }
+
             return ResponseHelper::success(
                 new BlogResource($blog_details),
-                "Blog Updated Successfully.",
+                [
+                    'en' => __('validation.update_blog'),
+                    'ar' => __('validation.update_blog'),
+                ],
                 201
             );
         } catch (\Exception $exception) {
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
     }
 
@@ -92,11 +134,33 @@ class BlogController extends Controller
     public function destroy(int $id)
     {
         try {
-            $this->blogService->deleteBlog($id);
+            $blog_details = $this->blogService->deleteBlog($id);
 
-            return ResponseHelper::success(null, "Blog Deleted Successfully", 200);
+            if (!$blog_details) {
+                return ResponseHelper::error(
+                    $blog_details,
+                    [
+                        'en' => __('validation.blog_not_found'),
+                        'ar' => __('validation.blog_not_found'),
+                    ],
+                    404);
+            }
+
+            return ResponseHelper::success(
+                null,
+                [
+                    'en' => __('validation.delete_blog'),
+                    'ar' => __('validation.delete_blog'),
+                ],
+                200);
         } catch (\Exception $exception) {
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
     }
 }

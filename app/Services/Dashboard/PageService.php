@@ -50,11 +50,17 @@ class PageService extends BaseService
     public function updatePage(array $page_request, int $id)
     {
         $page_details = $this->pageRepository->getPageById($id);
+        if (!$page_details) {
+            return null;
+        }
         return $this->pageRepository->updatePage($page_details, $page_request);
     }
     public function deletePage(int $id)
     {
         $page_details = $this->pageRepository->getPageById($id);
+        if (!$page_details) {
+            return null;
+        }
         return $this->pageRepository->deletePage($page_details);
     }
 

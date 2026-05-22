@@ -51,6 +51,10 @@ class SectionService extends BaseService
         $section_request = $request->all();
         $section_details = $this->sectionRepository->getSectionById($id);
 
+        if (!$section_details) {
+            return null;
+        }
+
         if ($request->hasFile('media')) {
 
             if (!empty($section_details->media_id)) {
@@ -70,6 +74,9 @@ class SectionService extends BaseService
     public function deleteSection(int $id)
     {
         $section_details = $this->sectionRepository->getSectionById($id);
+        if (!$section_details) {
+            return null;
+        }
         return $this->sectionRepository->deleteSection($section_details);
     }
 }

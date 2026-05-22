@@ -23,6 +23,7 @@ class UpdateCareer extends FormRequest
     public function rules(): array
     {
         return [
+
             'title' => 'required|array',
 
             'description' => 'nullable|array',
@@ -36,6 +37,10 @@ class UpdateCareer extends FormRequest
             'deadline' => 'nullable|date',
 
             'is_active' => 'nullable|in:0,1',
+
+            'created_by' => 'required|integer|exists:users,id',
+
+            'updated_by' => 'required|integer|exists:users,id',
         ];
     }
 }

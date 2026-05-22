@@ -20,16 +20,33 @@ class CareerApplicationController extends Controller
 
         return ResponseHelper::success(
             CareerApplicationResource::collection($career_applications_list),
-            "Careers Returned Successfully.",
+            [
+                'en' => __('validation.get_career_applications_list'),
+                'ar' => __('validation.get_career_applications_list'),
+            ],
             200
         );
     }
 
     public function show(int $id){
         $career_application_details = $this->careerApplicationService->getCareerApplicationById($id);
+
+        if (!$career_application_details) {
+            return ResponseHelper::error(
+                $career_application_details,
+                [
+                    'en' => __('validation.career_application_not_found'),
+                    'ar' => __('validation.career_application_not_found'),
+                ],
+                404);
+        }
+
         return ResponseHelper::success(
             new CareerApplicationResource($career_application_details),
-            "",
+            [
+                'en' => __('validation.get_career_application_details'),
+                'ar' => __('validation.get_career_application_details'),
+            ],
             200);
     }
 }

@@ -32,11 +32,17 @@ class CareerService extends BaseService
     public function updateCareer(array $career_request, int $id)
     {
         $career_details = $this->careerRepository->getCareerById($id);
+        if (!$career_details) {
+            return null;
+        }
         return $this->careerRepository->updateCareer($career_details, $career_request);
     }
     public function deleteCareer(int $id)
     {
         $career_details = $this->careerRepository->getCareerById($id);
+        if (!$career_details) {
+            return null;
+        }
         return $this->careerRepository->deleteCareer($career_details);
     }
 }

@@ -22,7 +22,10 @@ class AddNewCareer extends FormRequest
      */
     public function rules(): array
     {
+        // Career Request Validation Rules
+
         return [
+
             'title' => 'required|array',
 
             'description' => 'nullable|array',
@@ -36,6 +39,10 @@ class AddNewCareer extends FormRequest
             'deadline' => 'nullable|date',
 
             'is_active' => 'nullable|in:0,1',
+
+            'created_by' => 'required|integer|exists:users,id',
+
+            'updated_by' => 'required|integer|exists:users,id',
         ];
     }
 }
