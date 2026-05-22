@@ -60,11 +60,11 @@ class PageService extends BaseService
 
     public function preparePageDetails(array $page_request){
         return  [
-            'slug' => $page_request->slug,
-            'title' => json_decode($page_request->title, true),
-            'excerpt' => json_decode($page_request->excerpt, true),
-            'content' => json_decode($page_request->content, true),
-            'seo' => json_decode($page_request->seo, true),
+            // 'slug' => $page_request->slug,
+            // 'title' => json_decode($page_request->title, true),
+            // 'excerpt' => json_decode($page_request->excerpt, true),
+            // 'content' => json_decode($page_request->content, true),
+            // 'seo' => json_decode($page_request->seo, true),
         ];
     }
 }

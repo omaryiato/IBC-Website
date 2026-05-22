@@ -89,6 +89,10 @@ class BlogService extends BaseService
             'is_published' => $blog_request['is_published'] ?? 1,
 
             'published_at' => $blog_request['published_at'] ?? now(),
+
+            'created_by' => $blog_request['created_by'],
+
+            'updated_by' => $blog_request['updated_by'],
         ];
     }
 }

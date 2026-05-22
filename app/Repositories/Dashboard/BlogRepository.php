@@ -17,6 +17,7 @@ class BlogRepository
         return Blog::with(['media', 'user'])->findOrFail($id);
     }
 
+
     public function addNewBlog(array $blog_request)
     {
         return Blog::create($blog_request);
