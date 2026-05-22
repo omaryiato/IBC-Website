@@ -76,7 +76,7 @@ class BlogController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            $blog_details = $this->blogService->updateBlog($request->all(), $id);
+            $blog_details = $this->blogService->updateBlog($request, $id);
 
             return ResponseHelper::success(
                 new BlogResource($blog_details),

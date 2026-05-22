@@ -37,7 +37,7 @@ class ItemController extends Controller
 
         return ResponseHelper::success(
             new ItemResource($item_details),
-            "Item Returned Successfully.",
+            "Item Added Successfully.",
             200
         );
     }
@@ -62,7 +62,7 @@ class ItemController extends Controller
     public function update(Request $request, int $id)
     {
         try {
-            $item_details = $this->itemService->updateItem($request->all(), $id);
+            $item_details = $this->itemService->updateItem($request, $id);
 
             return ResponseHelper::success(
                 new ItemResource($item_details),

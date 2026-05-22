@@ -40,9 +40,23 @@ class BlogService extends BaseService
         return $this->blogRepository->addNewBlog($blog_request);
     }
 
-    public function updateBlog(array $blog_request, int $id)
+    public function updateBlog($request, int $id)
     {
+        $blog_request = $request->all();
         $blog_details = $this->blogRepository->getBlogById($id);
+
+        if ($request->hasFile('media')) {
+
+            if (!empty($blog_details->media_id)) {
+                $this->mediaService->deleteMedia($blog_details->media_id);
+            }
+
+            $media_id = $this->mediaService->prepareMedia($request->file('media'),'sections');
+
+            $blog_request['media_id'] = $media_id;
+
+        }
+
         return $this->blogRepository->updateBlog($blog_details, $blog_request);
     }
     public function deleteBlog(int $id)

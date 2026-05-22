@@ -41,9 +41,23 @@ class ItemService extends BaseService
         return $this->itemRepository->addNewItem($item_request);
     }
 
-    public function updateItem(array $item_request, int $id)
+    public function updateItem($request, int $id)
     {
+        $item_request = $request->all();
         $item_details = $this->itemRepository->getItemById($id);
+
+        if ($request->hasFile('media')) {
+
+            if (!empty($item_details->media_id)) {
+                $this->mediaService->deleteMedia($item_details->media_id);
+            }
+
+            $media_id = $this->mediaService->prepareMedia($request->file('media'),'sections');
+
+            $item_request['media_id'] = $media_id;
+
+        }
+
         return $this->itemRepository->updateItem($item_details, $item_request);
     }
     public function deleteItem(int $id)

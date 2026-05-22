@@ -53,24 +53,27 @@ class MainService
 
         $cv_file_name = "{$applicant_name}_CV.{$extension}";
 
+        $cv_file_path = public_path("documents/careers/job_application_{$application_request['career_id']}/{$cv_file_name}");
+
         return [
             'career_id' => $application_request['career_id'],
             'full_name' => $application_request['full_name'],
             'email' => $application_request['email'],
             'phone' => $application_request['phone'],
-            'cv_file' => $cv_file_name,
+            'cv_file' => $cv_file_path,
+            'message' => $application_request['message'],
         ];
     }
 
     public function uploadCvFile($cv_file, string $cv_file_name, int $career_id)
     {
-        $cv_path = public_path("documents/job_application_{$career_id}/");
+        $cv_file_path = public_path("documents/careers/job_application_{$career_id}");
 
-        if (!File::exists($cv_path)) {
-            File::makeDirectory($cv_path, 0755, true);
+        if (!File::exists($cv_file_path)) {
+            File::makeDirectory($cv_file_path, 0755, true);
         }
 
-        return $cv_file->move($cv_path, $cv_file_name);
+        return $cv_file->move($cv_file_path, $cv_file_name);
     }
 
     public function ContactUs(array $message_request)
