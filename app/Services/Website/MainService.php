@@ -53,7 +53,7 @@ class MainService
 
         $cv_file_name = "{$applicant_name}_CV.{$extension}";
 
-        $cv_file_path = public_path("documents/careers/job_application_{$application_request['career_id']}/{$cv_file_name}");
+        $cv_file_path = "documents/careers/job_application_{$application_request['career_id']}/{$cv_file_name}";
 
         return [
             'career_id' => $application_request['career_id'],

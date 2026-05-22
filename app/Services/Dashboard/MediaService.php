@@ -51,7 +51,7 @@ class MediaService
 
         $file->move($destination_path, $media_name);
 
-        return "documents/{$folder}/{$media_name}";
+        return "documents/website_media/{$folder}/{$media_name}";
     }
 
     protected function detectFileType(UploadedFile $file): string
