@@ -28,6 +28,8 @@ class ItemResource extends JsonResource
 
             'sort_order' => $this->sort_order,
 
+            'item_code' => $this->item_code,
+
             'created_by' => $this->created_by,
 
             'updated_by' => $this->updated_by,

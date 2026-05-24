@@ -29,7 +29,7 @@ class SettingService extends BaseService
 
     public function addNewSetting(array $setting_request)
     {
-        return $this->settingRepository->addNewSetting($setting_request);
+        return $this->settingRepository->addNewSetting($this->prepareSettingDetails($setting_request));
     }
 
     public function updateSetting(array $setting_request, int $id)
@@ -40,6 +40,7 @@ class SettingService extends BaseService
             return null;
         }
 
+        $setting_request = $this->prepareSettingDetails($setting_request);
         return $this->settingRepository->updateSetting($setting_details, $setting_request);
     }
     public function deleteSetting(int $id)
@@ -51,5 +52,15 @@ class SettingService extends BaseService
         }
 
         return $this->settingRepository->deleteSetting($setting_details);
+    }
+
+    public function prepareSettingDetails(array $setting_request) : array
+    {
+        return  [
+            'key' => $setting_request['key'],
+            'value' => json_decode($setting_request['value'], true) ?? null,
+            'created_by' => $setting_request['created_by'],
+            'updated_by' => $setting_request['updated_by'],
+        ];
     }
 }

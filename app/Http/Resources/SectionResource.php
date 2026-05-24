@@ -26,6 +26,8 @@ class SectionResource extends JsonResource
 
             'sort_order' => $this->sort_order,
 
+            'section_code' => $this->section_code,
+
             'is_active' => $this->is_active,
 
             'created_by' => $this->created_by,

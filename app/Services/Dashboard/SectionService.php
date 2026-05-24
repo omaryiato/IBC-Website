@@ -43,7 +43,7 @@ class SectionService extends BaseService
             $section_request['media_id'] = $media_id;
         }
 
-        return $this->sectionRepository->addNewSection($section_request);
+        return $this->sectionRepository->addNewSection($this->prepareSectionDetails($section_request));
     }
 
     public function updateSection($request, int $id)
@@ -68,6 +68,8 @@ class SectionService extends BaseService
 
         }
 
+        $section_request = $this->prepareSectionDetails($section_request);
+
         return $this->sectionRepository->updateSection($section_details, $section_request);
     }
 
@@ -78,5 +80,20 @@ class SectionService extends BaseService
             return null;
         }
         return $this->sectionRepository->deleteSection($section_details);
+    }
+
+    public function prepareSectionDetails(array $section_request) : array
+    {
+        return  [
+            'page_id' => $section_request['page_id'],
+            'type' => $section_request['type'],
+            'title' => json_decode($section_request['title'], true) ?? null,
+            'description' => json_decode($section_request['description'], true) ?? null,
+            'settings' => json_decode($section_request['settings'], true) ?? null,
+            'sort_order' => $section_request['sort_order'],
+            'section_code' => $section_request['section_code'],
+            'created_by' => $section_request['created_by'],
+            'updated_by' => $section_request['updated_by'],
+        ];
     }
 }

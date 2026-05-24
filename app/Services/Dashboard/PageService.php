@@ -53,6 +53,7 @@ class PageService extends BaseService
         if (!$page_details) {
             return null;
         }
+        $page_request = $this->preparePageDetails($page_request);
         return $this->pageRepository->updatePage($page_details, $page_request);
     }
     public function deletePage(int $id)
@@ -64,13 +65,16 @@ class PageService extends BaseService
         return $this->pageRepository->deletePage($page_details);
     }
 
-    public function preparePageDetails(array $page_request){
+    public function preparePageDetails(array $page_request) : array
+    {
         return  [
-            // 'slug' => $page_request->slug,
-            // 'title' => json_decode($page_request->title, true),
-            // 'excerpt' => json_decode($page_request->excerpt, true),
-            // 'content' => json_decode($page_request->content, true),
-            // 'seo' => json_decode($page_request->seo, true),
+            'slug' => $page_request['slug'],
+            'meta_title' => json_decode($page_request['meta_title'], true) ?? null,
+            'meta_description' => json_decode($page_request['meta_description'], true) ?? null,
+            'is_active' => $page_request['is_active'] ?? 1,
+            'page_code' => $page_request['page_code'],
+            'created_by' => $page_request['created_by'],
+            'updated_by' => $page_request['updated_by'],
         ];
     }
 }

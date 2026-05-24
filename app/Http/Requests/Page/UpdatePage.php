@@ -27,6 +27,7 @@ class UpdatePage extends FormRequest
             'slug' => 'required|string|max:255|unique:pages,slug,' . $id,
             'meta_title' => 'nullable|array',
             'meta_description' => 'nullable|array',
+            'page_code' => 'required|string|max:50|unique:pages,page_code,' . $id,
             'is_active' => 'nullable|in:0,1',
         ];
     }

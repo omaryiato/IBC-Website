@@ -99,6 +99,8 @@ class ItemService extends BaseService
 
             'sort_order' => $item_details['sort_order'] ?? 0,
 
+            'item_code' => $item_details['item_code'],
+
             'is_active' => $item_details['is_active'] ?? 1,
 
             'created_by' => $item_details['created_by'] ?? null,

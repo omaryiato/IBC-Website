@@ -26,6 +26,7 @@ class AddNewPage extends FormRequest
             'slug' => 'required|string|max:255|unique:pages,slug',
             'meta_title' => 'nullable|array',
             'meta_description' => 'nullable|array',
+            'page_code' => 'required|string|max:50|unique:pages,page_code',
             'is_active' => 'nullable|in:0,1',
             'created_by' => 'required|integer|exists:users,id',
             'updated_by' => 'required|integer|exists:users,id',

@@ -200,7 +200,7 @@ return [
     'update_blog' => 'Blog updated successfully.',
     'delete_blog' => 'Blog deleted successfully.',
 
-     /*
+    /*
     |--------------------------------------------------------------------------
     | Careers Validation
     |--------------------------------------------------------------------------
@@ -289,6 +289,64 @@ return [
     'update_setting' => 'Setting updated successfully.',
     'delete_setting' => 'Setting deleted successfully.',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Website Messages
+    |--------------------------------------------------------------------------
+    */
+
+    'home_page' => 'Pages successfully retrieved.',
+    'blog_page' => 'Blogs successfully retrieved.',
+    'career_page' => 'Careers successfully retrieved.',
+    'apply_job' => 'Your Application Sent Successfully.',
+    'contact_us' => 'Your Message Sent Successfully.',
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Website Validation
+    |--------------------------------------------------------------------------
+    */
+
+    'career_id' => [
+        'required' => 'Career is required.',
+        'integer'  => 'Invalid career selection.',
+        'exists'   => 'Selected career does not exist.',
+    ],
+
+    'full_name' => [
+        'required' => 'Full name is required.',
+        'string'   => 'Full name must be a valid text.',
+        'max'      => 'Full name must not exceed 255 characters.',
+    ],
+
+    'email' => [
+        'required' => 'Email is required.',
+        'email'    => 'Please enter a valid email address.',
+        'max'      => 'Email must not exceed 255 characters.',
+    ],
+
+    'phone' => [
+        'string' => 'Phone number must be valid text.',
+        'max'    => 'Phone number must not exceed 100 characters.',
+    ],
+
+    'cv_file' => [
+        'required' => 'CV file is required.',
+        'file'     => 'Invalid file uploaded.',
+        'mimes'    => 'CV must be a PDF, DOC, or DOCX file.',
+        'max'      => 'CV file must not exceed 10MB.',
+    ],
+
+    'message' => [
+        'string' => 'Message must be valid text.',
+        'max'    => 'Message must not exceed 5000 characters.',
+    ],
+
+    'subject' => [
+        'string' => 'Message must be valid text.',
+        'max'    => 'Message must not exceed 255 characters.',
+    ],
 
 ];
 

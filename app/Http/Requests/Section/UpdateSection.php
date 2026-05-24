@@ -22,6 +22,7 @@ class UpdateSection extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route("section");
         return [
 
             'page_id' => 'required|integer|exists:pages,id',
@@ -37,6 +38,8 @@ class UpdateSection extends FormRequest
             'settings' => 'nullable|array',
 
             'sort_order' => 'nullable|integer|min:0|unique:sections,sort_order',
+
+            'section_code' => 'required|string|max:50|unique:sections,section_code,' . $id,
 
             'is_active' => 'nullable|in:0,1',
 

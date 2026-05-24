@@ -19,6 +19,7 @@ class Item extends Model
         'link',
         'extra_data',
         'sort_order',
+        'item_code',
         'is_active',
         'created_by',
         'updated_by',

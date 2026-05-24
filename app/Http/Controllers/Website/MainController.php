@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Website;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CareerApplication\AddNewCareerApplication;
+use App\Http\Requests\ContactMessage\AddNewContactMessage;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\CareerResource;
 use App\Http\Resources\PageResource;
@@ -24,8 +26,8 @@ class MainController extends Controller
         return ResponseHelper::success(
             PageResource::collection($active_pages_list),
             [
-                "en" => "Pages Returned Successfully.",
-                "ar" => "تم ارجاع الصفحات بنجاح"
+                'en' => __('validation.home_page'),
+                'ar' => __('validation.home_page'),
             ],
             200
         );
@@ -37,7 +39,10 @@ class MainController extends Controller
 
         return ResponseHelper::success(
             BlogResource::collection($published_blogs_list),
-            "Blogs Returned Successfully.",
+            [
+                'en' => __('validation.blog_page'),
+                'ar' => __('validation.blog_page'),
+            ],
             200
         );
     }
@@ -48,40 +53,61 @@ class MainController extends Controller
 
         return ResponseHelper::success(
             CareerResource::collection($active_careers_list),
-            "Careers Returned Successfully.",
+            [
+                'en' => __('validation.career_page'),
+                'ar' => __('validation.career_page'),
+            ],
             200
         );
     }
 
-    public function ApplyJobApplication(Request $request)
+    public function ApplyJobApplication(AddNewCareerApplication $request)
     {
         try{
             $this->mainService->ApplyJobApplication($request->all());
 
             return ResponseHelper::success(
                 null,
-                "Application Applied Successfully.",
+                [
+                    'en' => __('validation.apply_job'),
+                    'ar' => __('validation.apply_job'),
+                ],
                 201
             );
 
         } catch(Exception $exception){
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
 
     }
-    public function ContactUs(Request $request)
+    public function ContactUs(AddNewContactMessage $request)
     {
         try{
             $this->mainService->ContactUs($request->all());
 
             return ResponseHelper::success(
                 null,
-                "Your Message Sent Successfully.",
+                [
+                    'en' => __('validation.contact_us'),
+                    'ar' => __('validation.contact_us'),
+                ],
                 201
             );
 
         } catch(Exception $exception){
-            return ResponseHelper::error("Somthing went wrong!", $exception->getMessage(), 500);
+            return ResponseHelper::error(
+                [
+                    'en' => __('validation.exception_error'),
+                    'ar' => __('validation.exception_error'),
+                ],
+                $exception->getMessage(),
+                500);
         }
 
     }

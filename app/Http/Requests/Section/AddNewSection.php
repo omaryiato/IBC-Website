@@ -40,6 +40,8 @@ class AddNewSection extends FormRequest
 
             'sort_order' => 'nullable|integer|min:0',
 
+            'section_code' => 'required|string|max:50|unique:sections,section_code',
+
             'is_active' => 'nullable|in:0,1',
 
             'created_by' => 'required|integer|exists:users,id',

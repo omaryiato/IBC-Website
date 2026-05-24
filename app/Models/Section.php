@@ -18,6 +18,7 @@ class Section extends Model
         'description',
         'settings',
         'sort_order',
+        'section_code',
         'is_active',
         'media_id',
         'created_by',

@@ -22,6 +22,7 @@ class UpdateItem extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route("item");
         return [
 
             'section_id' => 'required|integer|exists:sections,id',
@@ -37,6 +38,8 @@ class UpdateItem extends FormRequest
             'extra_data' => 'nullable|array',
 
             'sort_order' => 'nullable|integer|min:0',
+
+            'item_code' => 'required|string|max:50|unique:items,item_code,' . $id,
 
             'is_active' => 'nullable|in:0,1',
 

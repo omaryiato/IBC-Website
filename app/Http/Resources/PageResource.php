@@ -20,6 +20,8 @@ class PageResource extends JsonResource
 
             "is_active" => $this->is_active,
 
+            "page_code" => $this->page_code,
+
             'created_by' => $this->created_by,
 
             'updated_by' => $this->updated_by,
