@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\CareerApplication;
 
+use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddNewCareerApplication extends FormRequest
+class AddNewCareerApplication extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

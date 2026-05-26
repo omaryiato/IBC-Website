@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Section;
 
+use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSection extends FormRequest
+class UpdateSection extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,13 +30,13 @@ class UpdateSection extends FormRequest
 
             'type' => 'required|string|max:100',
 
-            'title' => 'nullable|array',
+            // 'title' => 'nullable|array',
 
-            'description' => 'nullable|array',
+            // 'description' => 'nullable|array',
 
             'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:10240',
 
-            'settings' => 'nullable|array',
+            // 'settings' => 'nullable|array',
 
             'sort_order' => 'nullable|integer|min:0|unique:sections,sort_order',
 

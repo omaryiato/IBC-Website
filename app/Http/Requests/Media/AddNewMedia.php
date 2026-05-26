@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Media;
 
+use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddNewMedia extends FormRequest
+class AddNewMedia extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,7 @@ class AddNewMedia extends FormRequest
     {
         return[
             'media' => 'required|file|mimes:jpg,jpeg,png,webp,mp4,pdf,doc,docx|max:10240',
-            'alt_text' => 'nullable|array',
+            // 'alt_text' => 'nullable|array',
         ];
     }
 }

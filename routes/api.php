@@ -13,10 +13,20 @@ use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\ContactMessageController;
 use App\Http\Controllers\Website\MainController;
+use App\Http\Controllers\API\AuthController;
+
+
+// Route::post('/login', [AuthController::class, 'login']);
+
+// Route::middleware('auth:sanctum')->group(function () {
+
+//     Route::post('/logout', [AuthController::class, 'logout']);
+
+//     Route::get('/me', [AuthController::class, 'me']);
 
 
 
-
+// });
 Route::group(['prefix' => 'dashboard'], function () {
 
 
@@ -56,7 +66,9 @@ Route::group(['prefix' => 'dashboard'], function () {
 
             Route::apiResource('contact-message', ContactMessageController::class);
 
-});
+    });
+
+
 
 Route::group(['prefix' => 'website'], function () {
 

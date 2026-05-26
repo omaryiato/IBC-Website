@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Item;
 
+use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddNewItem extends FormRequest
+class AddNewItem extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,15 +29,15 @@ class AddNewItem extends FormRequest
 
             'section_id' => 'required|integer|exists:sections,id',
 
-            'title' => 'nullable|array',
+            // 'title' => 'nullable|array',
 
-            'description' => 'nullable|array',
+            // 'description' => 'nullable|array',
 
             'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:10240',
 
             'link' => 'nullable|url|max:500',
 
-            'extra_data' => 'nullable|array',
+            // 'extra_data' => 'nullable|array',
 
             'sort_order' => 'nullable|integer|min:0',
 

@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Blog;
 
+use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBlog extends FormRequest
+class UpdateBlog extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,15 +28,17 @@ class UpdateBlog extends FormRequest
 
             'slug' => 'required|string|max:255|unique:blogs,slug,' . $id,
 
-            'title' => 'required|array',
+            'title' => 'required',
+            // 'title' => 'required|array',
 
-            'excerpt' => 'nullable|array',
+            // 'excerpt' => 'nullable|array',
 
-            'content' => 'required|array',
+            'content' => 'required',
+            // 'content' => 'required|array',
 
             'media' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:10240',
 
-            'seo' => 'nullable|array',
+            // 'seo' => 'nullable|array',
 
             'is_published' => 'nullable|in:0,1',
 

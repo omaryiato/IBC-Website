@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Setting;
 
+use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddNewSetting extends FormRequest
+class AddNewSetting extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +29,7 @@ class AddNewSetting extends FormRequest
 
             'key' => 'required|string|max:255|unique:settings,key',
 
-            'value' => 'nullable|array',
+            // 'value' => 'nullable|array',
 
             'created_by' => 'required|integer|exists:users,id',
 

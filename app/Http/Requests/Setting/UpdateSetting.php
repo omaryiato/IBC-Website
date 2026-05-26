@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests\Setting;
 
+use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSetting extends FormRequest
+class UpdateSetting extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +24,12 @@ class UpdateSetting extends FormRequest
     public function rules(): array
     {
         $id = $this->route("setting");
-        
+
         return [
 
             'key' => 'required|string|max:255|unique:settings,key,' . $id,
 
-            'value' => 'nullable|array',
+            // 'value' => 'nullable|array',
 
             'created_by' => 'required|integer|exists:users,id',
 
