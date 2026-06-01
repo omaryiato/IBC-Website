@@ -25,7 +25,30 @@ return [
     ],
 
     "exception_error" => "Something went wrong.",
+    "invalid_data" => "Trying to insert invalid data.",
+    "unauthenticated" => "You dont have permission.",
+    "unauthorized" => "You dont have access.",
 
+    /*
+    |--------------------------------------------------------------------------
+    | Login Validation
+    |--------------------------------------------------------------------------
+    */
+
+    'password' => [
+        'required' => 'Password is required.',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Login Messages
+    |--------------------------------------------------------------------------
+    */
+
+    'invalid_credentials'   => 'Invalid email address or password.',
+    'logged_in'   => 'Welcome.',
+    'logged_out'   => 'Goodbye.',
+    'token_available'   => 'Token available.',
 
     /*
     |--------------------------------------------------------------------------
@@ -324,6 +347,7 @@ return [
         'required' => 'Email is required.',
         'email'    => 'Please enter a valid email address.',
         'max'      => 'Email must not exceed 255 characters.',
+        'exists'   => 'Selected email address does not exist.',
     ],
 
     'phone' => [

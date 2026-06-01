@@ -2,73 +2,79 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Login\Login;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Login $request)
     {
 
-        $request->validate([
+        $user_details = User::where('email', $request->email)
+                        ->where('is_active', 1)
+                        ->first();
 
-            'email' => [
-                'required',
-                'email'
-            ],
-
-            'password' => [
-                'required'
-            ]
-
-        ]);
-
-        $user = User::where('email', $request->email)
-            ->where('is_active', 1)
-            ->first();
-
-        if (!$user) {
-
-            return response()->json([
-                'message' => 'Invalid credentials'
-            ], 401);
+        if (!$user_details) {
+            return ResponseHelper::error(
+                    null,
+                    [
+                        'en' => __('validation.invalid_credentials'),
+                        'ar' => __('validation.invalid_credentials'),
+                    ],
+                    401);
         }
 
-        if (!Hash::check($request->password, $user->password)) {
+        if (!Hash::check($request->password, $user_details->password)) {
 
-            return response()->json([
-                'message' => 'Invalid credentials'
-            ], 401);
+            return ResponseHelper::error(
+                    null,
+                    [
+                        'en' => __('validation.invalid_credentials'),
+                        'ar' => __('validation.invalid_credentials'),
+                    ],
+                    401);
         }
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user_details->createToken('auth_token')->plainTextToken;
 
-        return response()->json([
-
-            'message' => 'Login successful',
-
-            'token' => $token,
-
-            'user' => $user
-
-        ]);
+        return ResponseHelper::success(
+                $user_details,
+                [
+                    'en' => __('validation.logged_in'),
+                    'ar' => __('validation.logged_in'),
+                    'token' => $token,
+                ],
+                200
+            );
     }
 
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json([
-            'message' => 'Logged out successfully'
-        ]);
+        return ResponseHelper::success(
+                null,
+                [
+                    'en' => __('validation.logged_out'),
+                    'ar' => __('validation.logged_out'),
+                ],
+                200
+            );
     }
 
-    public function me(Request $request)
+    public function refresh(Request $request)
     {
-        return response()->json([
-            'user' => $request->user()
-        ]);
+        return ResponseHelper::success(
+                $request->user(),
+                [
+                    'en' => __('validation.token_available'),
+                    'ar' => __('validation.token_available'),
+                ],
+                200
+            );
     }
 }

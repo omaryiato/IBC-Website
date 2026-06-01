@@ -37,6 +37,9 @@ class User extends Authenticatable
 
     protected $casts = [
         'is_active' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     protected $hidden = [
