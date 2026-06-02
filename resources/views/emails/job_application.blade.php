@@ -34,7 +34,7 @@
     <hr>
 
     <small style="color:#777;">
-        Submitted at: {{ $application_details->created_at }}
+        Submitted at: {{ now() }}
     </small>
 
 </div>
