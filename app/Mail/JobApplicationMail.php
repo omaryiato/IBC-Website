@@ -15,19 +15,35 @@ class JobApplicationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(public CareerApplication $application) {}
+    public $application_details;
+    protected $viewName;
+    protected $emailSubject;
+
+    /**
+     * Create a new message instance.
+     *
+     * @param array $application_details
+     * @param string $viewName
+     * @param string $emailSubject
+     */
+    public function __construct($application_details, $viewName = 'emails.job_application', $emailSubject = 'Job Applications: New Job Application')
+    {
+        $this->application_details = $application_details;
+        $this->viewName = $viewName;
+        $this->emailSubject = $emailSubject;
+    }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Job Application'
+            subject: $this->emailSubject
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            view: 'emails.job_application',
+            view: $this->viewName,
         );
     }
 }

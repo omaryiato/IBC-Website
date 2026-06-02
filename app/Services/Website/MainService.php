@@ -3,13 +3,15 @@
 namespace App\Services\Website;
 
 use App\Jobs\SendJobApplicationEmailJob;
+use App\Helpers\JobApplicationHelper;
 use App\Repositories\Website\MainRepository;
 use Illuminate\Support\Facades\File;
 
 class MainService
 {
     public function __construct(
-        protected MainRepository $mainRepository
+        protected MainRepository $mainRepository,
+        protected JobApplicationHelper $jobApplicationHelper
     ) {}
 
     public function getActivePagesList()
@@ -46,8 +48,8 @@ class MainService
             );
         }
 
-        // $this->sendNotification($application_details);
-        SendJobApplicationEmailJob::dispatch($application_details->id);
+        $this->jobApplicationHelper->JobApplicationNotification($application_details);
+        // SendJobApplicationEmailJob::dispatch($application_details->id);
 
         return $application_details;
     }

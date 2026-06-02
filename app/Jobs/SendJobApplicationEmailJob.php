@@ -25,7 +25,6 @@ class SendJobApplicationEmailJob implements ShouldQueue
             return;
         }
 
-        Mail::to('hr@company.com')
-            ->send(new JobApplicationMail($application));
+        // Mail::to('hr@company.com')->send(new JobApplicationMail($application));
     }
 }
