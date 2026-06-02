@@ -71,6 +71,13 @@ return [
         'array' => 'The meta description must be an array.',
     ],
 
+    'page_code' => [
+        'required' => 'Page code is required.',
+        'unique'     => 'This code already assigned to another page.',
+        'string'   => 'Page code must be a valid string.',
+        'max'      => 'Page code may not be greater than 50 characters.',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Pages Messages
@@ -129,6 +136,13 @@ return [
         'unique'     => 'This order already assigned to another section.',
     ],
 
+    'section_code' => [
+        'required' => 'Section code is required.',
+        'unique'     => 'This code already assigned to another section.',
+        'string'   => 'Section code must be a valid string.',
+        'max'      => 'Section code may not be greater than 50 characters.',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Section Messages
@@ -163,6 +177,13 @@ return [
 
     'extra_data' => [
         'array' => 'Extra data must be an array.',
+    ],
+
+    'item_code' => [
+        'required' => 'Item code is required.',
+        'unique'     => 'This code already assigned to another item.',
+        'string'   => 'Item code must be a valid string.',
+        'max'      => 'Item code may not be greater than 50 characters.',
     ],
 
 
