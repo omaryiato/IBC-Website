@@ -16,7 +16,7 @@ class MediaResource extends JsonResource
 
             'original_name' => $this->original_name,
 
-            'file_path' => asset(str_replace('/', '\'', $this->file_path)),
+            'file_path' => asset(str_replace('//', '/', $this->file_path)),
 
             'file_type' => $this->file_type,
 
