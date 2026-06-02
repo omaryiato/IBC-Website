@@ -38,7 +38,8 @@ class UpdateSection extends BaseRequest
 
             // 'settings' => 'nullable|array',
 
-            'sort_order' => 'nullable|integer|min:0|unique:sections,sort_order',
+            'sort_order' => 'nullable|integer|min:0',
+            // 'sort_order' => 'nullable|integer|min:0|unique:sections,sort_order',
 
             'section_code' => 'required|string|max:50|unique:sections,section_code,' . $id,
 

@@ -90,9 +90,9 @@ class SectionService extends BaseService
             'title' => json_decode($section_request['title'], true) ?? null,
             'description' => json_decode($section_request['description'], true) ?? null,
             'settings' => json_decode($section_request['settings'], true) ?? null,
-            'sort_order' => $section_request['sort_order'],
+            'sort_order' => $section_request['sort_order'] ?? 0,
             'section_code' => $section_request['section_code'],
-            'media_id' => $section_request['media_id'],
+            'media_id' => $section_request['media_id'] ?? null,
         ];
 
         if (isset($section_request['created_by'])) {
