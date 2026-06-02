@@ -21,8 +21,8 @@ class ContactMessageController extends Controller
         return ResponseHelper::success(
             ContactMessageResource::collection($contact_messages_list),
             [
-                'en' => __('validation.get_contact_messages_list'),
-                'ar' => __('validation.get_contact_messages_list'),
+                'en' => trans('validation.get_contact_messages_list'),
+                'ar' => trans('validation.get_contact_messages_list'),
             ],
             200
         );
@@ -36,8 +36,8 @@ class ContactMessageController extends Controller
             return ResponseHelper::error(
                 $contact_message_details,
                 [
-                    'en' => __('validation.contact_message_not_found'),
-                    'ar' => __('validation.contact_message_not_found'),
+                    'en' => trans('validation.contact_message_not_found'),
+                    'ar' => trans('validation.contact_message_not_found'),
                 ],
                 404);
         }
@@ -45,8 +45,8 @@ class ContactMessageController extends Controller
         return ResponseHelper::success(
             new ContactMessageResource($contact_message_details),
             [
-                'en' => __('validation.get_contact_message_details'),
-                'ar' => __('validation.get_contact_message_details'),
+                'en' => trans('validation.get_contact_message_details'),
+                'ar' => trans('validation.get_contact_message_details'),
             ],
             200
         );

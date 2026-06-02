@@ -49,8 +49,8 @@ class ApiAuditLogger
         } catch (\Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);

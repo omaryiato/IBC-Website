@@ -22,8 +22,8 @@ class AuthController extends Controller
             return ResponseHelper::error(
                     null,
                     [
-                        'en' => __('validation.invalid_credentials'),
-                        'ar' => __('validation.invalid_credentials'),
+                        'en' => trans('validation.invalid_credentials'),
+                        'ar' => trans('validation.invalid_credentials'),
                     ],
                     401);
         }
@@ -33,8 +33,8 @@ class AuthController extends Controller
             return ResponseHelper::error(
                     null,
                     [
-                        'en' => __('validation.invalid_credentials'),
-                        'ar' => __('validation.invalid_credentials'),
+                        'en' => trans('validation.invalid_credentials'),
+                        'ar' => trans('validation.invalid_credentials'),
                     ],
                     401);
         }
@@ -44,8 +44,8 @@ class AuthController extends Controller
         return ResponseHelper::success(
                 $user_details,
                 [
-                    'en' => __('validation.logged_in'),
-                    'ar' => __('validation.logged_in'),
+                    'en' => trans('validation.logged_in'),
+                    'ar' => trans('validation.logged_in'),
                     'token' => $token,
                 ],
                 200
@@ -59,8 +59,8 @@ class AuthController extends Controller
         return ResponseHelper::success(
                 null,
                 [
-                    'en' => __('validation.logged_out'),
-                    'ar' => __('validation.logged_out'),
+                    'en' => trans('validation.logged_out'),
+                    'ar' => trans('validation.logged_out'),
                 ],
                 200
             );
@@ -71,8 +71,8 @@ class AuthController extends Controller
         return ResponseHelper::success(
                 $request->user(),
                 [
-                    'en' => __('validation.token_available'),
-                    'ar' => __('validation.token_available'),
+                    'en' => trans('validation.token_available'),
+                    'ar' => trans('validation.token_available'),
                 ],
                 200
             );

@@ -24,8 +24,8 @@ class PageController extends Controller
         return ResponseHelper::success(
             PageResource::collection($pages_list),
             [
-                'en' => __('validation.get_pages_list'),
-                'ar' => __('validation.get_pages_list'),
+                'en' => trans('validation.get_pages_list'),
+                'ar' => trans('validation.get_pages_list'),
             ],
             200
         );
@@ -39,8 +39,8 @@ class PageController extends Controller
             return ResponseHelper::error(
                 $page_details,
                 [
-                    'en' => __('validation.page_not_found'),
-                    'ar' => __('validation.page_not_found'),
+                    'en' => trans('validation.page_not_found'),
+                    'ar' => trans('validation.page_not_found'),
                 ],
                 404);
         }
@@ -48,8 +48,8 @@ class PageController extends Controller
         return ResponseHelper::success(
             new PageResource($page_details),
             [
-                'en' => __('validation.get_page_details'),
-                'ar' => __('validation.get_page_details'),
+                'en' => trans('validation.get_page_details'),
+                'ar' => trans('validation.get_page_details'),
             ],
             200
         );
@@ -77,8 +77,8 @@ class PageController extends Controller
             return ResponseHelper::success(
                 new PageResource($page_details),
                 [
-                    'en' => __('validation.add_new_page'),
-                    'ar' => __('validation.add_new_page'),
+                    'en' => trans('validation.add_new_page'),
+                    'ar' => trans('validation.add_new_page'),
                 ],
                 201
             );
@@ -86,8 +86,8 @@ class PageController extends Controller
         } catch(Exception $exception){
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -104,8 +104,8 @@ class PageController extends Controller
                 return ResponseHelper::error(
                     $page_details,
                     [
-                        'en' => __('validation.page_not_found'),
-                        'ar' => __('validation.page_not_found'),
+                        'en' => trans('validation.page_not_found'),
+                        'ar' => trans('validation.page_not_found'),
                     ],
                     404);
             }
@@ -113,16 +113,16 @@ class PageController extends Controller
             return ResponseHelper::success(
                 new PageResource($page_details),
                 [
-                    'en' => __('validation.update_page'),
-                    'ar' => __('validation.update_page'),
+                    'en' => trans('validation.update_page'),
+                    'ar' => trans('validation.update_page'),
                 ],
                 201
             );
         } catch (Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -139,23 +139,23 @@ class PageController extends Controller
                 return ResponseHelper::error(
                     $page_details,
                     [
-                        'en' => __('validation.page_not_found'),
-                        'ar' => __('validation.page_not_found'),
+                        'en' => trans('validation.page_not_found'),
+                        'ar' => trans('validation.page_not_found'),
                     ],
                     404);
             }
 
             return ResponseHelper::success(null,
             [
-                'en' => __('validation.delete_page'),
-                'ar' => __('validation.delete_page'),
+                'en' => trans('validation.delete_page'),
+                'ar' => trans('validation.delete_page'),
             ],
             200);
         } catch (Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);

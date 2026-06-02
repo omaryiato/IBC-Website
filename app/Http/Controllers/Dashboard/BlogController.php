@@ -23,8 +23,8 @@ class BlogController extends Controller
         return ResponseHelper::success(
             BlogResource::collection($blogs_list),
             [
-                'en' => __('validation.get_blogs_list'),
-                'ar' => __('validation.get_blogs_list'),
+                'en' => trans('validation.get_blogs_list'),
+                'ar' => trans('validation.get_blogs_list'),
             ],
             200
         );
@@ -39,8 +39,8 @@ class BlogController extends Controller
             return ResponseHelper::error(
                 $blog_details,
                 [
-                    'en' => __('validation.blog_not_found'),
-                    'ar' => __('validation.blog_not_found'),
+                    'en' => trans('validation.blog_not_found'),
+                    'ar' => trans('validation.blog_not_found'),
                 ],
                 404);
         }
@@ -48,8 +48,8 @@ class BlogController extends Controller
         return ResponseHelper::success(
             new BlogResource($blog_details),
             [
-                'en' => __('validation.get_blog_details'),
-                'ar' => __('validation.get_blog_details'),
+                'en' => trans('validation.get_blog_details'),
+                'ar' => trans('validation.get_blog_details'),
             ],
             200
         );
@@ -78,8 +78,8 @@ class BlogController extends Controller
             return ResponseHelper::success(
                 new BlogResource($blog_details),
                 [
-                    'en' => __('validation.add_new_blog'),
-                    'ar' => __('validation.add_new_blog'),
+                    'en' => trans('validation.add_new_blog'),
+                    'ar' => trans('validation.add_new_blog'),
                 ],
                 201
             );
@@ -87,8 +87,8 @@ class BlogController extends Controller
         } catch(\Exception $exception){
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -105,8 +105,8 @@ class BlogController extends Controller
                 return ResponseHelper::error(
                     $blog_details,
                     [
-                        'en' => __('validation.blog_not_found'),
-                        'ar' => __('validation.blog_not_found'),
+                        'en' => trans('validation.blog_not_found'),
+                        'ar' => trans('validation.blog_not_found'),
                     ],
                     404);
             }
@@ -114,16 +114,16 @@ class BlogController extends Controller
             return ResponseHelper::success(
                 new BlogResource($blog_details),
                 [
-                    'en' => __('validation.update_blog'),
-                    'ar' => __('validation.update_blog'),
+                    'en' => trans('validation.update_blog'),
+                    'ar' => trans('validation.update_blog'),
                 ],
                 201
             );
         } catch (\Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -140,8 +140,8 @@ class BlogController extends Controller
                 return ResponseHelper::error(
                     $blog_details,
                     [
-                        'en' => __('validation.blog_not_found'),
-                        'ar' => __('validation.blog_not_found'),
+                        'en' => trans('validation.blog_not_found'),
+                        'ar' => trans('validation.blog_not_found'),
                     ],
                     404);
             }
@@ -149,15 +149,15 @@ class BlogController extends Controller
             return ResponseHelper::success(
                 null,
                 [
-                    'en' => __('validation.delete_blog'),
-                    'ar' => __('validation.delete_blog'),
+                    'en' => trans('validation.delete_blog'),
+                    'ar' => trans('validation.delete_blog'),
                 ],
                 200);
         } catch (\Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);

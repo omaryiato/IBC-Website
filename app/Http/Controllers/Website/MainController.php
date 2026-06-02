@@ -26,8 +26,8 @@ class MainController extends Controller
         return ResponseHelper::success(
             PageResource::collection($active_pages_list),
             [
-                'en' => __('validation.home_page'),
-                'ar' => __('validation.home_page'),
+                'en' => trans('validation.home_page'),
+                'ar' => trans('validation.home_page'),
             ],
             200
         );
@@ -40,8 +40,8 @@ class MainController extends Controller
         return ResponseHelper::success(
             BlogResource::collection($published_blogs_list),
             [
-                'en' => __('validation.blog_page'),
-                'ar' => __('validation.blog_page'),
+                'en' => trans('validation.blog_page'),
+                'ar' => trans('validation.blog_page'),
             ],
             200
         );
@@ -54,8 +54,8 @@ class MainController extends Controller
         return ResponseHelper::success(
             CareerResource::collection($active_careers_list),
             [
-                'en' => __('validation.career_page'),
-                'ar' => __('validation.career_page'),
+                'en' => trans('validation.career_page'),
+                'ar' => trans('validation.career_page'),
             ],
             200
         );
@@ -69,8 +69,8 @@ class MainController extends Controller
             return ResponseHelper::success(
                 null,
                 [
-                    'en' => __('validation.apply_job'),
-                    'ar' => __('validation.apply_job'),
+                    'en' => trans('validation.apply_job'),
+                    'ar' => trans('validation.apply_job'),
                 ],
                 201
             );
@@ -78,8 +78,8 @@ class MainController extends Controller
         } catch(Exception $exception){
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -94,8 +94,8 @@ class MainController extends Controller
             return ResponseHelper::success(
                 null,
                 [
-                    'en' => __('validation.contact_us'),
-                    'ar' => __('validation.contact_us'),
+                    'en' => trans('validation.contact_us'),
+                    'ar' => trans('validation.contact_us'),
                 ],
                 201
             );
@@ -103,8 +103,8 @@ class MainController extends Controller
         } catch(Exception $exception){
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);

@@ -21,8 +21,8 @@ class CareerApplicationController extends Controller
         return ResponseHelper::success(
             CareerApplicationResource::collection($career_applications_list),
             [
-                'en' => __('validation.get_career_applications_list'),
-                'ar' => __('validation.get_career_applications_list'),
+                'en' => trans('validation.get_career_applications_list'),
+                'ar' => trans('validation.get_career_applications_list'),
             ],
             200
         );
@@ -35,8 +35,8 @@ class CareerApplicationController extends Controller
             return ResponseHelper::error(
                 $career_application_details,
                 [
-                    'en' => __('validation.career_application_not_found'),
-                    'ar' => __('validation.career_application_not_found'),
+                    'en' => trans('validation.career_application_not_found'),
+                    'ar' => trans('validation.career_application_not_found'),
                 ],
                 404);
         }
@@ -44,8 +44,8 @@ class CareerApplicationController extends Controller
         return ResponseHelper::success(
             new CareerApplicationResource($career_application_details),
             [
-                'en' => __('validation.get_career_application_details'),
-                'ar' => __('validation.get_career_application_details'),
+                'en' => trans('validation.get_career_application_details'),
+                'ar' => trans('validation.get_career_application_details'),
             ],
             200);
     }

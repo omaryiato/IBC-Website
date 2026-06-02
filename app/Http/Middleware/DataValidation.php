@@ -29,8 +29,8 @@ class DataValidation
                         return ResponseHelper::error(
                                     $key,
                                     [
-                                        'en' => __('validation.invalid_data'),
-                                        'ar' => __('validation.invalid_data'),
+                                        'en' => trans('validation.invalid_data'),
+                                        'ar' => trans('validation.invalid_data'),
                                     ],
                                     400);
                     }
@@ -39,8 +39,8 @@ class DataValidation
                         return ResponseHelper::error(
                                     $key,
                                     [
-                                        'en' => __('validation.invalid_data'),
-                                        'ar' => __('validation.invalid_data'),
+                                        'en' => trans('validation.invalid_data'),
+                                        'ar' => trans('validation.invalid_data'),
                                     ],
                                     400);
                     }
@@ -52,8 +52,8 @@ class DataValidation
         } catch (\Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);

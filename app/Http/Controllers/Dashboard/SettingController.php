@@ -24,8 +24,8 @@ class SettingController extends Controller
         return ResponseHelper::success(
             SettingResource::collection($settings_list),
             [
-                'en' => __('validation.get_settings_list'),
-                'ar' => __('validation.get_settings_list'),
+                'en' => trans('validation.get_settings_list'),
+                'ar' => trans('validation.get_settings_list'),
             ],
             200
         );
@@ -39,8 +39,8 @@ class SettingController extends Controller
             return ResponseHelper::error(
                 $setting_details,
                 [
-                    'en' => __('validation.setting_not_found'),
-                    'ar' => __('validation.setting_not_found'),
+                    'en' => trans('validation.setting_not_found'),
+                    'ar' => trans('validation.setting_not_found'),
                 ],
                 404);
         }
@@ -48,8 +48,8 @@ class SettingController extends Controller
         return ResponseHelper::success(
             new SettingResource($setting_details),
             [
-                'en' => __('validation.get_setting_details'),
-                'ar' => __('validation.get_setting_details'),
+                'en' => trans('validation.get_setting_details'),
+                'ar' => trans('validation.get_setting_details'),
             ],
             200
         );
@@ -63,8 +63,8 @@ class SettingController extends Controller
             return ResponseHelper::success(
                 new SettingResource($setting_details),
                 [
-                    'en' => __('validation.add_new_setting'),
-                    'ar' => __('validation.add_new_setting'),
+                    'en' => trans('validation.add_new_setting'),
+                    'ar' => trans('validation.add_new_setting'),
                 ],
                 201
             );
@@ -72,8 +72,8 @@ class SettingController extends Controller
         } catch(Exception $exception){
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -90,8 +90,8 @@ class SettingController extends Controller
                 return ResponseHelper::error(
                     $setting_details,
                     [
-                        'en' => __('validation.setting_not_found'),
-                        'ar' => __('validation.setting_not_found'),
+                        'en' => trans('validation.setting_not_found'),
+                        'ar' => trans('validation.setting_not_found'),
                     ],
                     404);
             }
@@ -99,16 +99,16 @@ class SettingController extends Controller
             return ResponseHelper::success(
                 new SettingResource($setting_details),
                 [
-                    'en' => __('validation.update_setting'),
-                    'ar' => __('validation.update_setting'),
+                    'en' => trans('validation.update_setting'),
+                    'ar' => trans('validation.update_setting'),
                 ],
                 201
             );
         } catch (Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -125,8 +125,8 @@ class SettingController extends Controller
                 return ResponseHelper::error(
                     $setting_details,
                     [
-                        'en' => __('validation.setting_not_found'),
-                        'ar' => __('validation.setting_not_found'),
+                        'en' => trans('validation.setting_not_found'),
+                        'ar' => trans('validation.setting_not_found'),
                     ],
                     404);
             }
@@ -134,15 +134,15 @@ class SettingController extends Controller
             return ResponseHelper::success(
                 null,
                 [
-                    'en' => __('validation.delete_setting'),
-                    'ar' => __('validation.delete_setting'),
+                    'en' => trans('validation.delete_setting'),
+                    'ar' => trans('validation.delete_setting'),
                 ],
                 200);
         } catch (Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);

@@ -24,8 +24,8 @@ class ItemController extends Controller
         return ResponseHelper::success(
             ItemResource::collection($items_list),
             [
-                'en' => __('validation.get_items_list'),
-                'ar' => __('validation.get_items_list'),
+                'en' => trans('validation.get_items_list'),
+                'ar' => trans('validation.get_items_list'),
             ],
             200
         );
@@ -40,8 +40,8 @@ class ItemController extends Controller
             return ResponseHelper::error(
                 $item_details,
                 [
-                    'en' => __('validation.item_not_found'),
-                    'ar' => __('validation.item_not_found'),
+                    'en' => trans('validation.item_not_found'),
+                    'ar' => trans('validation.item_not_found'),
                 ],
                 404);
         }
@@ -49,8 +49,8 @@ class ItemController extends Controller
         return ResponseHelper::success(
             new ItemResource($item_details),
             [
-                'en' => __('validation.get_item_details'),
-                'ar' => __('validation.get_item_details'),
+                'en' => trans('validation.get_item_details'),
+                'ar' => trans('validation.get_item_details'),
             ],
             200
         );
@@ -64,8 +64,8 @@ class ItemController extends Controller
             return ResponseHelper::success(
                 new ItemResource($item_details),
                 [
-                    'en' => __('validation.add_new_item'),
-                    'ar' => __('validation.add_new_item'),
+                    'en' => trans('validation.add_new_item'),
+                    'ar' => trans('validation.add_new_item'),
                 ],
                 201
             );
@@ -73,8 +73,8 @@ class ItemController extends Controller
         } catch(\Exception $exception){
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -91,8 +91,8 @@ class ItemController extends Controller
                 return ResponseHelper::error(
                     $item_details,
                     [
-                        'en' => __('validation.item_not_found'),
-                        'ar' => __('validation.item_not_found'),
+                        'en' => trans('validation.item_not_found'),
+                        'ar' => trans('validation.item_not_found'),
                     ],
                     404);
             }
@@ -100,16 +100,16 @@ class ItemController extends Controller
             return ResponseHelper::success(
                 new ItemResource($item_details),
                 [
-                    'en' => __('validation.update_item'),
-                    'ar' => __('validation.update_item'),
+                    'en' => trans('validation.update_item'),
+                    'ar' => trans('validation.update_item'),
                 ],
                 201
             );
         } catch (\Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -126,8 +126,8 @@ class ItemController extends Controller
                 return ResponseHelper::error(
                     $item_details,
                     [
-                        'en' => __('validation.item_not_found'),
-                        'ar' => __('validation.item_not_found'),
+                        'en' => trans('validation.item_not_found'),
+                        'ar' => trans('validation.item_not_found'),
                     ],
                     404);
             }
@@ -135,15 +135,15 @@ class ItemController extends Controller
             return ResponseHelper::success(
                 null,
                 [
-                    'en' => __('validation.delete_item'),
-                    'ar' => __('validation.delete_item'),
+                    'en' => trans('validation.delete_item'),
+                    'ar' => trans('validation.delete_item'),
                 ],
                 200);
         } catch (\Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);

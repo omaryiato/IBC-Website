@@ -24,8 +24,8 @@ class SectionController extends Controller
         return ResponseHelper::success(
             SectionResource::collection($sections_list),
             [
-                'en' => __('validation.get_sections_list'),
-                'ar' => __('validation.get_sections_list'),
+                'en' => trans('validation.get_sections_list'),
+                'ar' => trans('validation.get_sections_list'),
             ],
             200
         );
@@ -39,8 +39,8 @@ class SectionController extends Controller
             return ResponseHelper::error(
                 $section_details,
                 [
-                    'en' => __('validation.section_not_found'),
-                    'ar' => __('validation.section_not_found'),
+                    'en' => trans('validation.section_not_found'),
+                    'ar' => trans('validation.section_not_found'),
                 ],
                 404);
         }
@@ -48,8 +48,8 @@ class SectionController extends Controller
         return ResponseHelper::success(
             new SectionResource($section_details),
             [
-                'en' => __('validation.get_section_details'),
-                'ar' => __('validation.get_section_details'),
+                'en' => trans('validation.get_section_details'),
+                'ar' => trans('validation.get_section_details'),
             ],
             200
         );
@@ -63,8 +63,8 @@ class SectionController extends Controller
             return ResponseHelper::success(
                 new SectionResource($section_details),
                 [
-                    'en' => __('validation.add_new_section'),
-                    'ar' => __('validation.add_new_section'),
+                    'en' => trans('validation.add_new_section'),
+                    'ar' => trans('validation.add_new_section'),
                 ],
                 201
             );
@@ -72,8 +72,8 @@ class SectionController extends Controller
         } catch(\Exception $exception){
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -90,8 +90,8 @@ class SectionController extends Controller
                 return ResponseHelper::error(
                     $section_details,
                     [
-                        'en' => __('validation.section_not_found'),
-                        'ar' => __('validation.section_not_found'),
+                        'en' => trans('validation.section_not_found'),
+                        'ar' => trans('validation.section_not_found'),
                     ],
                     404);
             }
@@ -99,16 +99,16 @@ class SectionController extends Controller
             return ResponseHelper::success(
                 new SectionResource($section_details),
                 [
-                    'en' => __('validation.update_section'),
-                    'ar' => __('validation.update_section'),
+                    'en' => trans('validation.update_section'),
+                    'ar' => trans('validation.update_section'),
                 ],
                 201
             );
         } catch (\Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);
@@ -125,8 +125,8 @@ class SectionController extends Controller
                 return ResponseHelper::error(
                     $section_details,
                     [
-                        'en' => __('validation.section_not_found'),
-                        'ar' => __('validation.section_not_found'),
+                        'en' => trans('validation.section_not_found'),
+                        'ar' => trans('validation.section_not_found'),
                     ],
                     404);
             }
@@ -134,15 +134,15 @@ class SectionController extends Controller
             return ResponseHelper::success(
                 null,
                 [
-                    'en' => __('validation.delete_section'),
-                    'ar' => __('validation.delete_section'),
+                    'en' => trans('validation.delete_section'),
+                    'ar' => trans('validation.delete_section'),
                 ],
                 200);
         } catch (\Exception $exception) {
             return ResponseHelper::error(
                 [
-                    'en' => __('validation.exception_error'),
-                    'ar' => __('validation.exception_error'),
+                    'en' => trans('validation.exception_error'),
+                    'ar' => trans('validation.exception_error'),
                 ],
                 $exception->getMessage(),
                 500);

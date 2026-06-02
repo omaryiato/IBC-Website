@@ -17,8 +17,8 @@ class UserAccessibility
             return ResponseHelper::error(
                 null,
                 [
-                    'en' => __('validation.unauthenticated'),
-                    'ar' => __('validation.unauthenticated'),
+                    'en' => trans('validation.unauthenticated'),
+                    'ar' => trans('validation.unauthenticated'),
                 ],
                 401
             );
@@ -29,8 +29,8 @@ class UserAccessibility
             return ResponseHelper::error(
                 null,
                 [
-                    'en' => __('validation.unauthorized'),
-                    'ar' => __('validation.unauthorized'),
+                    'en' => trans('validation.unauthorized'),
+                    'ar' => trans('validation.unauthorized'),
                 ],
                 403
             );
