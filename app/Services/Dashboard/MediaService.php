@@ -34,7 +34,6 @@ class MediaService
             'mime_type'     => $mime_type,
             'file_size'     => $file_size,
         ]);
-
         return $media_details['id'];
     }
 
@@ -56,7 +55,7 @@ class MediaService
 
     protected function uploadMediaFile(UploadedFile $file,string $media_name,string $folder): string
     {
-        $destination_path = public_path("documents\website_media\{$folder}");
+        $destination_path = public_path("documents/website_media/{$folder}");
 
         if (!File::exists($destination_path)) {
             File::makeDirectory($destination_path, 0755, true);
@@ -64,7 +63,7 @@ class MediaService
 
         $file->move($destination_path, $media_name);
 
-        return "documents\website_media\{$folder}\{$media_name}";
+        return "documents/website_media/{$folder}/{$media_name}";
     }
 
     protected function detectFileType(UploadedFile $file): string
