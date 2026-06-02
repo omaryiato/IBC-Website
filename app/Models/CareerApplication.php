@@ -17,6 +17,7 @@ class CareerApplication extends Model
         'phone',
         'cv_file',
         'message',
+        'created_at',
     ];
 
     protected $casts = [

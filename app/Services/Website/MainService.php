@@ -72,6 +72,7 @@ class MainService
             'phone' => $application_request['phone'],
             'cv_file' => $cv_file_path,
             'message' => $application_request['message'],
+            'created_at' => now(),
         ];
     }
 
