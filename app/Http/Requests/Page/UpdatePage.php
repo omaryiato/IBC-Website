@@ -30,6 +30,7 @@ class UpdatePage extends BaseRequest
             // 'meta_description' => 'nullable|array',
             'page_code' => 'required|string|max:50|unique:pages,page_code,' . $id,
             'is_active' => 'nullable|in:0,1',
+            'updated_by' => 'required|integer|exists:users,id',
         ];
     }
 }

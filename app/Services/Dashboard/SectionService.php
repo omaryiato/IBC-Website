@@ -84,7 +84,7 @@ class SectionService extends BaseService
 
     public function prepareSectionDetails(array $section_request) : array
     {
-        return  [
+        $data = [
             'page_id' => $section_request['page_id'],
             'type' => $section_request['type'],
             'title' => json_decode($section_request['title'], true) ?? null,
@@ -92,8 +92,17 @@ class SectionService extends BaseService
             'settings' => json_decode($section_request['settings'], true) ?? null,
             'sort_order' => $section_request['sort_order'],
             'section_code' => $section_request['section_code'],
-            'created_by' => $section_request['created_by'],
-            'updated_by' => $section_request['updated_by'],
+            'media_id' => $section_request['media_id'],
         ];
+
+        if (isset($section_request['created_by'])) {
+            $data['created_by'] = $section_request['created_by'];
+        }
+
+        if (isset($section_request['updated_by'])) {
+            $data['updated_by'] = $section_request['updated_by'];
+        }
+
+        return $data;
     }
 }

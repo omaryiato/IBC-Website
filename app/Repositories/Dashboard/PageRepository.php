@@ -9,12 +9,18 @@ class PageRepository
 {
     public function getPagesList()
     {
-        return Page::with('sections.items')->get();
+        return Page::with([
+                    'sections.media',
+                    'sections.items.media'
+                ])->get();
     }
 
     public function getPageById(int $id)
     {
-        return Page::with('sections.items')->findOrFail($id);
+        return Page::with([
+                    'sections.media',
+                    'sections.items.media'
+                ])->findOrFail($id);
     }
 
     public function addNewPage(array $page_request)

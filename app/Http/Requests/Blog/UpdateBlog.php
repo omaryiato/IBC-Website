@@ -44,8 +44,6 @@ class UpdateBlog extends BaseRequest
 
             'published_at' => 'nullable|date',
 
-            'created_by' => 'required|integer|exists:users,id',
-
             'updated_by' => 'required|integer|exists:users,id',
         ];
     }

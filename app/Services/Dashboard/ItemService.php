@@ -75,37 +75,43 @@ class ItemService extends BaseService
         return $this->itemRepository->deleteItem($item_details);
     }
 
-    public function prepareItemDetails(array $item_details): array
+    public function prepareItemDetails(array $item_request): array
     {
-        return [
+        $data = [
 
-            'section_id' => $item_details['section_id'],
+            'section_id' => $item_request['section_id'],
 
-            'title' => !empty($item_details['title'])
-                ? json_decode($item_details['title'], true)
+            'title' => !empty($item_request['title'])
+                ? json_decode($item_request['title'], true)
                 : null,
 
-            'description' => !empty($item_details['description'])
-                ? json_decode($item_details['description'], true)
+            'description' => !empty($item_request['description'])
+                ? json_decode($item_request['description'], true)
                 : null,
 
-            'media_id' => $item_details['media_id'] ?? null,
+            'media_id' => $item_request['media_id'] ?? null,
 
-            'link' => $item_details['link'] ?? null,
+            'link' => $item_request['link'] ?? null,
 
-            'extra_data' => !empty($item_details['extra_data'])
-                ? json_decode($item_details['extra_data'], true)
+            'extra_data' => !empty($item_request['extra_data'])
+                ? json_decode($item_request['extra_data'], true)
                 : null,
 
-            'sort_order' => $item_details['sort_order'] ?? 0,
+            'sort_order' => $item_request['sort_order'] ?? 0,
 
-            'item_code' => $item_details['item_code'],
+            'item_code' => $item_request['item_code'],
 
-            'is_active' => $item_details['is_active'] ?? 1,
-
-            'created_by' => $item_details['created_by'] ?? null,
-
-            'updated_by' => $item_details['updated_by'] ?? null,
+            'is_active' => $item_request['is_active'] ?? 1,
         ];
+
+        if (isset($item_request['created_by'])) {
+            $data['created_by'] = $item_request['created_by'];
+        }
+
+        if (isset($item_request['updated_by'])) {
+            $data['updated_by'] = $item_request['updated_by'];
+        }
+
+        return $data;
     }
 }

@@ -24,6 +24,8 @@ class MediaService
 
         $media_path = $this->uploadMediaFile($file, $media_name, $folder);
 
+
+
         $media_details = $this->mediaRepository->addNewMedia([
             'file_name'     => $media_name,
             'original_name' => $original_name,
@@ -32,7 +34,7 @@ class MediaService
             'mime_type'     => $mime_type,
             'file_size'     => $file_size,
         ]);
-
+        
         return $media_details['id'];
     }
 

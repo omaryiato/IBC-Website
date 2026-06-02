@@ -50,7 +50,7 @@ class CareerService extends BaseService
     public function prepareCareerDetails(array $career_request) : array
     {
 
-        return  [
+        $data =  [
             'title' => json_decode($career_request['title'], true) ?? null,
             'description' => json_decode($career_request['description'], true) ?? null,
             'requirements' => json_decode($career_request['requirements'], true) ?? null,
@@ -58,8 +58,16 @@ class CareerService extends BaseService
             'location' => $career_request['location'],
             'deadline' => $career_request['deadline'],
             'is_active' => $career_request['is_active'],
-            'created_by' => $career_request['created_by'],
-            'updated_by' => $career_request['updated_by'],
         ];
+
+        if (isset($career_request['created_by'])) {
+            $data['created_by'] = $career_request['created_by'];
+        }
+
+        if (isset($career_request['updated_by'])) {
+            $data['updated_by'] = $career_request['updated_by'];
+        }
+
+        return $data;
     }
 }

@@ -40,8 +40,6 @@ class UpdateCareer extends BaseRequest
 
             'is_active' => 'nullable|in:0,1',
 
-            'created_by' => 'required|integer|exists:users,id',
-
             'updated_by' => 'required|integer|exists:users,id',
         ];
     }

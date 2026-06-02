@@ -67,14 +67,22 @@ class PageService extends BaseService
 
     public function preparePageDetails(array $page_request) : array
     {
-        return  [
+        $data =  [
             'slug' => $page_request['slug'],
             'meta_title' => json_decode($page_request['meta_title'], true) ?? null,
             'meta_description' => json_decode($page_request['meta_description'], true) ?? null,
             'is_active' => $page_request['is_active'] ?? 1,
             'page_code' => $page_request['page_code'],
-            'created_by' => $page_request['created_by'],
-            'updated_by' => $page_request['updated_by'],
         ];
+
+        if (isset($page_request['created_by'])) {
+            $data['created_by'] = $page_request['created_by'];
+        }
+
+        if (isset($page_request['updated_by'])) {
+            $data['updated_by'] = $page_request['updated_by'];
+        }
+
+        return $data;
     }
 }

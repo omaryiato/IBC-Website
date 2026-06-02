@@ -71,13 +71,13 @@ class BlogService extends BaseService
         if (!$blog_details) {
             return null;
         }
-        
+
         return $this->blogRepository->deleteBlog($blog_details);
     }
 
     public function prepareBlogDetails(array $blog_request): array
     {
-        return [
+        $data = [
 
             'slug' => $blog_request['slug'],
 
@@ -98,10 +98,16 @@ class BlogService extends BaseService
             'is_published' => $blog_request['is_published'] ?? 1,
 
             'published_at' => $blog_request['published_at'] ?? now(),
-
-            'created_by' => $blog_request['created_by'],
-
-            'updated_by' => $blog_request['updated_by'],
         ];
+
+        if (isset($blog_request['created_by'])) {
+            $data['created_by'] = $blog_request['created_by'];
+        }
+
+        if (isset($blog_request['updated_by'])) {
+            $data['updated_by'] = $blog_request['updated_by'];
+        }
+
+        return $data;
     }
 }
