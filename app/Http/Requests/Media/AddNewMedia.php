@@ -24,7 +24,7 @@ class AddNewMedia extends BaseRequest
     public function rules(): array
     {
         return[
-            'media' => 'required|file|mimes:jpg,jpeg,png,webp,mp4,pdf,doc,docx|max:10240',
+            'media' => 'required|file|mimes:jpg,jpeg,png,webp,mp4,pdf,doc,docx|max:300240',
             // 'alt_text' => 'nullable|array',
         ];
     }

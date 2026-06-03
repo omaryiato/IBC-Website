@@ -34,7 +34,7 @@ class UpdateSection extends BaseRequest
 
             // 'description' => 'nullable|array',
 
-            'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:10240',
+            'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:300240',
 
             // 'settings' => 'nullable|array',
 

@@ -33,7 +33,7 @@ class AddNewItem extends BaseRequest
 
             // 'description' => 'nullable|array',
 
-            'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:10240',
+            'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:300240',
 
             'link' => 'nullable|url|max:500',
 

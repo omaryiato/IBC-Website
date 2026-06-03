@@ -35,7 +35,7 @@ class AddNewBlog extends BaseRequest
             // 'content' => 'required|array',
             'content' => 'required',
 
-            'media' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:10240',
+            'media' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:300240',
 
             // 'seo' => 'nullable|array',
 
