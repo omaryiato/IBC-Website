@@ -19,10 +19,10 @@
                         <td style="background:#0f172a;padding:30px;text-align:center;">
 
                             <img
-                                src="{{ asset('logo.png') }}"
+                                src="http://72.61.95.48:8001/documents/uploads/logo.png"
                                 alt="IBC Group"
                                 width="120"
-                                style="display:block;margin:0 auto 15px auto;">
+                                border="0">
 
                             <h1 style="margin:0;color:#ffffff;font-size:24px;">
                                 New Job Application
