@@ -42,10 +42,15 @@ class JobApplicationMail extends Mailable
 
     public function content(): Content
     {
+        $path = public_path('documents/uploads/logo.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
         return new Content(
             view: $this->viewName,
             with: [
-                'logoPath' => public_path('documents/uploads/logo.png'),
+                'logo' => $base64,
             ]
         );
     }
@@ -53,9 +58,6 @@ class JobApplicationMail extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromPath(public_path('documents/uploads/logo.png'))
-                ->as('logo.png')
-                ->withMime('image/png'),
         ];
     }
 }
