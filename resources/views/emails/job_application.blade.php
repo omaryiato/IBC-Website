@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +7,16 @@
 <body style="margin:0;padding:0;background-color:#f4f6f9;font-family:Arial,Helvetica,sans-serif;">
 
     <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9;padding:30px 0;">
+        @php
+dd([
+    'full_name' => gettype($application_details->full_name),
+    'email' => gettype($application_details->email),
+    'phone' => gettype($application_details->phone),
+    'message' => gettype($application_details->message),
+    'cv_file' => gettype($application_details->cv_file),
+    'career_title' => gettype($application_details->career?->title),
+]);
+@endphp
         <tr>
             <td align="center">
 
@@ -18,12 +27,21 @@
                     <!-- Header -->
                     <tr>
                         <td style="background:#0f172a;padding:30px;text-align:center;">
+
+                            <img
+                                src="{{ url('uploads/logo.png') }}"
+                                alt="IBC Group"
+                                width="120"
+                                style="display:block;margin:0 auto 15px auto;">
+
                             <h1 style="margin:0;color:#ffffff;font-size:24px;">
                                 New Job Application
                             </h1>
+
                             <p style="margin:8px 0 0;color:#cbd5e1;font-size:14px;">
                                 A new candidate has submitted an application
                             </p>
+
                         </td>
                     </tr>
 
@@ -42,7 +60,7 @@
 
                             <!-- Applicant Details -->
                             <table width="100%" cellpadding="0" cellspacing="0"
-                                   style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">
+                                    style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">
 
                                 <tr>
                                     <td width="35%"
@@ -87,7 +105,7 @@
                                         Career Titel
                                     </td>
                                     <td style="padding:14px;color:#475569;border-bottom:1px solid #e2e8f0;">
-                                        #{{ $application_details->career?->title }}
+                                        {{ $application_details->career?->title['en'] ?? '' }}
                                     </td>
                                 </tr>
 
