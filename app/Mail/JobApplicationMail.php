@@ -44,6 +44,9 @@ class JobApplicationMail extends Mailable
     {
         return new Content(
             view: $this->viewName,
+            with: [
+                'logoPath' => public_path('documents/uploads/logo.png'),
+            ]
         );
     }
 

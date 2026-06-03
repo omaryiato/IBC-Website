@@ -18,7 +18,10 @@
                     <tr>
                         <td style="background:#0f172a;padding:30px;text-align:center;">
 
-                            <img src="cid:logo.png" width="120" alt="IBC Group">
+                           <img
+                            src="{{ $logoPath }}"
+                            alt="IBC Group"
+                            width="120">
 
                             <h1 style="margin:0;color:#ffffff;font-size:24px;">
                                 New Job Application
