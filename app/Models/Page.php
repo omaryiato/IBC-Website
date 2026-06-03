@@ -17,6 +17,7 @@ class Page extends Model
         'meta_description',
         'is_active',
         'page_code',
+        'media_id',
         'created_by',
         'updated_by',
     ];
@@ -33,5 +34,10 @@ class Page extends Model
     public function sections()
     {
         return $this->hasMany(Section::class);
+    }
+
+    public function media()
+    {
+        return $this->belongsTo(Media::class, 'media_id');
     }
 }

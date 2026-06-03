@@ -30,6 +30,8 @@ class PageResource extends JsonResource
             'updated_at' => $this->updated_at?->format('Y-m-d H:i:s'),
             'deleted_at' => $this->deleted_at?->format('Y-m-d H:i:s'),
 
+            'page_media' => new MediaResource($this->whenLoaded('media')),
+
             'sections' => SectionResource::collection($this->whenLoaded('sections')),
         ];
     }

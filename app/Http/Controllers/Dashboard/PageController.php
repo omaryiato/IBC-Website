@@ -72,7 +72,7 @@ class PageController extends Controller
     public function store(AddNewPage $request)
     {
         try{
-            $page_details = $this->pageService->addNewPage($request->all());
+            $page_details = $this->pageService->addNewPage($request);
 
             return ResponseHelper::success(
                 new PageResource($page_details),
@@ -98,7 +98,7 @@ class PageController extends Controller
     public function update(UpdatePage $request, int $id)
     {
         try {
-            $page_details = $this->pageService->updatePage($request->all(), $id);
+            $page_details = $this->pageService->updatePage($request, $id);
 
             if (!$page_details) {
                 return ResponseHelper::error(
