@@ -2,25 +2,25 @@
 
 namespace App\Helpers;
 
-use App\Mail\JobApplicationMail;
-use App\Models\CareerApplication;
+use App\Mail\ContactMessageMail;
+use App\Models\ContactMessage;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
 
-class JobApplicationHelper
+class ContactMessageHelper
 {
 
 
-    public function JobApplicationNotification(int $application_id)
+    public function ContactMessageNotification(int $message_id)
     {
 
         try {
 
-            $application_details = CareerApplication::with('career')->findOrFail($application_id);
+            $message_details = ContactMessage::findOrFail($message_id);
 
-            $view_name = 'emails.job_application';
-            $subject = 'Job Applications: New Job Application';
+            $view_name = 'emails.contact_message';
+            $subject = 'Contact Messages: New Message';
 
             // $email_address = 'oalkhateeb1710@gmail.com';
             $email_address = 'o.bsharat@beveconsult.com';
@@ -28,11 +28,11 @@ class JobApplicationHelper
 
             $data = [
                 'header' => "IBC Group",
-                'title' => "New Job Application",
+                'title' => "New Message",
             ];
 
             if (!empty($email_address)) {
-                $emailSent = Mail::to($email_address)->send(new JobApplicationMail($application_details, $view_name, $subject));
+                $emailSent = Mail::to($email_address)->send(new ContactMessageMail($message_details, $view_name, $subject));
                 return $emailSent;
             } else {
                 // Log::channel('sendnotification')->debug("error->");

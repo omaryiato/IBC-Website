@@ -10,6 +10,7 @@ class PageRepository
     public function getPagesList()
     {
         return Page::with([
+                    'media',
                     'sections.media',
                     'sections.items.media'
                 ])->get();
@@ -18,6 +19,7 @@ class PageRepository
     public function getPageById(int $id)
     {
         return Page::with([
+                    'media',
                     'sections.media',
                     'sections.items.media'
                 ])->findOrFail($id);

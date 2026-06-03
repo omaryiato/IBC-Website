@@ -13,6 +13,7 @@ class MainRepository
     public function getActivePagesList()
     {
         return Page::with([
+            'media',
             'sections' => function ($q) {
                 $q->where('is_active', 1)
                 ->with([

@@ -4,6 +4,7 @@ namespace App\Services\Website;
 
 use App\Jobs\SendJobApplicationEmailJob;
 use App\Helpers\JobApplicationHelper;
+use App\Helpers\ContactMessageHelper;
 use App\Repositories\Website\MainRepository;
 use Illuminate\Support\Facades\File;
 
@@ -11,7 +12,8 @@ class MainService
 {
     public function __construct(
         protected MainRepository $mainRepository,
-        protected JobApplicationHelper $jobApplicationHelper
+        protected JobApplicationHelper $jobApplicationHelper,
+        protected ContactMessageHelper $contactMessageHelper
     ) {}
 
     public function getActivePagesList()
@@ -89,8 +91,9 @@ class MainService
 
     public function ContactUs(array $message_request)
     {
-        return $this->mainRepository->ContactUs($message_request);
+        $message_details = $this->mainRepository->ContactUs($message_request);
 
+        return $this->contactMessageHelper->ContactMessageNotification($message_details->id);
     }
 
     // sendNotification Funtion To Send Notification by email and sms
