@@ -18,9 +18,11 @@
                     <tr>
                         <td style="background:#0f172a;padding:30px;text-align:center;">
 
-                            <img
-    src="https://www.google.com/imgres?q=images&imgurl=https%3A%2F%2Fwww.shutterstock.com%2Fimage-photo%2Fsun-sets-behind-mountain-ranges-600nw-2479236003.jpg&imgrefurl=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fcolourful-images&docid=nzRuif9ngHGPqM&tbnid=c_mEJe-o6eTwkM&vet=12ahUKEwj_lYK6ouuUAxXRRv4FHcuiMOkQnPAOegQIFxAB..i&w=600&h=400&hcb=2&ved=2ahUKEwj_lYK6ouuUAxXRRv4FHcuiMOkQnPAOegQIFxAB"
-    width="120">
+                           <img
+    src="http://72.61.95.48:8001/documents/uploads/logo.png"
+    width="120"
+    height="120"
+    style="border:2px solid red;">
 
                             <h1 style="margin:0;color:#ffffff;font-size:24px;">
                                 New Job Application
