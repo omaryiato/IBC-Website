@@ -19,7 +19,7 @@
                         <td style="background:#0f172a;padding:30px;text-align:center;">
 
                             <img
-                                src="{{ url('uploads/logo.png') }}"
+                                src="{{ asset('uploads/logo.png') }}"
                                 alt="IBC Group"
                                 width="120"
                                 style="display:block;margin:0 auto 15px auto;">
