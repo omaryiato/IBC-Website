@@ -28,16 +28,27 @@ class AuthController extends Controller
                     401);
         }
 
-        if (!Hash::check($request->password, $user_details->password)) {
-
+        if ($request->password !== $user_details->password) {
             return ResponseHelper::error(
-                    null,
-                    [
-                        'en' => trans('validation.invalid_credentials'),
-                        'ar' => trans('validation.invalid_credentials'),
-                    ],
-                    401);
+                null,
+                [
+                    'en' => trans('validation.invalid_credentials'),
+                    'ar' => trans('validation.invalid_credentials'),
+                ],
+                401
+            );
         }
+
+        // if (!Hash::check($request->password, $user_details->password)) {
+
+        //     return ResponseHelper::error(
+        //             null,
+        //             [
+        //                 'en' => trans('validation.invalid_credentials'),
+        //                 'ar' => trans('validation.invalid_credentials'),
+        //             ],
+        //             401);
+        // }
 
         $token = $user_details->createToken('auth_token')->plainTextToken;
 
@@ -66,15 +77,55 @@ class AuthController extends Controller
             );
     }
 
+    // public function refresh(Request $request)
+    // {
+    //     return ResponseHelper::success(
+    //             $request->user(),
+    //             [
+    //                 'en' => trans('validation.token_available'),
+    //                 'ar' => trans('validation.token_available'),
+    //             ],
+    //             200
+    //         );
+    // }
+
     public function refresh(Request $request)
     {
-        return ResponseHelper::success(
-                $request->user(),
+        $user = $request->user();
+
+        // No user (no token or invalid token)
+        if (!$user) {
+            return ResponseHelper::error(
+                null,
                 [
-                    'en' => trans('validation.token_available'),
-                    'ar' => trans('validation.token_available'),
+                    'en' => 'Unauthenticated or token missing.',
+                    'ar' => 'غير مصرح أو التوكن غير موجود.',
                 ],
-                200
+                401
             );
+        }
+
+        // Optional: check if token exists in DB (Sanctum)
+        $token = $user->currentAccessToken();
+
+        if (!$token) {
+            return ResponseHelper::error(
+                null,
+                [
+                    'en' => 'Token not found or expired.',
+                    'ar' => 'التوكن غير موجود أو منتهي.',
+                ],
+                401
+            );
+        }
+
+        return ResponseHelper::success(
+            $user,
+            [
+                'en' => trans('validation.token_available'),
+                'ar' => trans('validation.token_available'),
+            ],
+            200
+        );
     }
 }

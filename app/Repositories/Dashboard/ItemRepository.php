@@ -19,6 +19,10 @@ class ItemRepository
 
     public function addNewItem(array $item_request)
     {
+        $last_order = Item::max('sort_order');
+
+        $item_request['sort_order'] = $last_order + 1 ?? 0;
+        
         return Item::create($item_request);
     }
 
