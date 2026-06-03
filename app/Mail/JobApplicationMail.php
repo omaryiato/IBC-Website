@@ -47,16 +47,12 @@ class JobApplicationMail extends Mailable
         );
     }
 
-    public function build()
+    public function attachments(): array
     {
-        $logo = $this->embed(
-            public_path('documents/uploads/logo.png')
-        );
-
-        return $this->subject($this->emailSubject)
-            ->view($this->viewName)
-            ->with([
-                'logo' => $logo,
-            ]);
+        return [
+            Attachment::fromPath(public_path('documents/uploads/logo.png'))
+                ->as('logo.png')
+                ->withMime('image/png'),
+        ];
     }
 }
