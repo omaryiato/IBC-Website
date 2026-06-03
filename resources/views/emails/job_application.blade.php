@@ -7,16 +7,6 @@
 <body style="margin:0;padding:0;background-color:#f4f6f9;font-family:Arial,Helvetica,sans-serif;">
 
     <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9;padding:30px 0;">
-        @php
-dd([
-    'full_name' => gettype($application_details->full_name),
-    'email' => gettype($application_details->email),
-    'phone' => gettype($application_details->phone),
-    'message' => gettype($application_details->message),
-    'cv_file' => gettype($application_details->cv_file),
-    'career_title' => gettype($application_details->career?->title),
-]);
-@endphp
         <tr>
             <td align="center">
 
