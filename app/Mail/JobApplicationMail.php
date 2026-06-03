@@ -46,4 +46,17 @@ class JobApplicationMail extends Mailable
             view: $this->viewName,
         );
     }
+
+    public function build()
+    {
+        $logo = $this->embed(
+            public_path('documents/uploads/logo.png')
+        );
+
+        return $this->subject($this->emailSubject)
+            ->view($this->viewName)
+            ->with([
+                'logo' => $logo,
+            ]);
+    }
 }
