@@ -14,21 +14,21 @@ class ContactMessageMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $application_details;
+    public $message_details;
     protected $viewName;
     protected $emailSubject;
 
     /**
      * Create a new message instance.
      *
-     * @param  $application_details
+     * @param  $message_details
      * @param string $viewName
      * @param string $emailSubject
      */
 
-    public function __construct($application_details, $viewName = 'emails.contact_message', $emailSubject = 'Contact Messages: New Message')
+    public function __construct($message_details, $viewName = 'emails.contact_message', $emailSubject = 'Contact Messages: New Message')
     {
-        $this->application_details = $application_details;
+        $this->message_details = $message_details;
         $this->viewName = $viewName;
         $this->emailSubject = $emailSubject;
     }

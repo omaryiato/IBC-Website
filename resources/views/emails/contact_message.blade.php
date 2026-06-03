@@ -12,7 +12,7 @@
 
             <!-- Main Container -->
             <table width="650" cellpadding="0" cellspacing="0"
-                   style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                    style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
 
                 <!-- Header -->
                 <tr>
@@ -62,7 +62,7 @@
                                     Full Name
                                 </td>
                                 <td style="padding:14px;color:#475569;border-bottom:1px solid #e2e8f0;">
-                                    {{ $contact->full_name }}
+                                    {{ $message_details->full_name }}
                                 </td>
                             </tr>
 
@@ -71,17 +71,17 @@
                                     Email
                                 </td>
                                 <td style="padding:14px;color:#475569;border-bottom:1px solid #e2e8f0;">
-                                    {{ $contact->email }}
+                                    {{ $message_details->email }}
                                 </td>
                             </tr>
 
-                            @if($contact->subject)
+                            @if($message_details->subject)
                             <tr>
                                 <td style="padding:14px;background:#f8fafc;font-weight:bold;color:#334155;border-bottom:1px solid #e2e8f0;">
                                     Subject
                                 </td>
                                 <td style="padding:14px;color:#475569;border-bottom:1px solid #e2e8f0;">
-                                    {!! nl2br(e($contact->message)) !!}
+                                    {!! nl2br(e($message_details->message)) !!}
                                 </td>
                             </tr>
                             @endif
@@ -91,7 +91,7 @@
                                     Message
                                 </td>
                                 <td style="padding:14px;color:#475569;line-height:1.6;">
-                                    {!! nl2br(e($contact->message)) !!}
+                                    {!! nl2br(e($message_details->message)) !!}
                                 </td>
                             </tr>
 
