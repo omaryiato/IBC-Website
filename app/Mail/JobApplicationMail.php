@@ -22,7 +22,7 @@ class JobApplicationMail extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param array $application_details
+     * @param  $application_details
      * @param string $viewName
      * @param string $emailSubject
      */

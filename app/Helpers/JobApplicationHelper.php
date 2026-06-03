@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Mail\JobApplicationMail;
+use App\Models\CareerApplication;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
@@ -11,10 +12,12 @@ class JobApplicationHelper
 {
 
 
-    public function JobApplicationNotification($application_details)
+    public function JobApplicationNotification($application_id)
     {
 
         try {
+
+            $application_details = CareerApplication::with('career')->findOrFail($application_id);
 
             $view_name = 'emails.job_application';
             $subject = 'Job Applications: New Job Application';

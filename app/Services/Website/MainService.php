@@ -48,7 +48,7 @@ class MainService
             );
         }
 
-        $this->jobApplicationHelper->JobApplicationNotification($application_details);
+        $this->jobApplicationHelper->JobApplicationNotification($application_details->id);
         // SendJobApplicationEmailJob::dispatch($application_details->id);
 
         return $application_details;
