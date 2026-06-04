@@ -30,6 +30,8 @@ class UpdateItem extends BaseRequest
 
             // 'title' => 'nullable|array',
 
+            'type' => 'required|string|max:100',
+
             // 'description' => 'nullable|array',
 
             'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:300240',

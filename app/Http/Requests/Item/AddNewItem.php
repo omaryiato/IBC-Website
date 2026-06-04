@@ -30,6 +30,8 @@ class AddNewItem extends BaseRequest
             'section_id' => 'required|integer|exists:sections,id',
 
             // 'title' => 'nullable|array',
+            
+            'type' => 'required|string|max:100',
 
             // 'description' => 'nullable|array',
 

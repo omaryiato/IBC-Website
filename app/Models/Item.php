@@ -13,6 +13,7 @@ class Item extends Model
 
     protected $fillable = [
         'section_id',
+        'type',
         'title',
         'description',
         'media_id',

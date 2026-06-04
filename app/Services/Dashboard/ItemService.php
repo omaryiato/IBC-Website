@@ -81,6 +81,8 @@ class ItemService extends BaseService
 
             'section_id' => $item_request['section_id'],
 
+            'type' => $item_request['type']  ?? null ,
+
             'title' => !empty($item_request['title'])
                 ? json_decode($item_request['title'], true)
                 : null,

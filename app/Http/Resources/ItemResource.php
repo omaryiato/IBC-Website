@@ -16,6 +16,8 @@ class ItemResource extends JsonResource
 
             'media_id' => $this->media_id,
 
+            'type' => $this->type,
+
             'title' => $this->title,
 
             'description' => $this->description,
