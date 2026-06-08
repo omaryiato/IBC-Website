@@ -177,9 +177,17 @@ class MediaService
 
     public function deleteMedia($media)
     {
-        if (File::exists(public_path($media?->file_path))) {
-            File::delete(public_path($media?->file_path));
+        if (!$media) {
+            return false;
         }
+
+        if (
+            $media->file_path &&
+            File::exists(public_path($media->file_path))
+        ) {
+            File::delete(public_path($media->file_path));
+        }
+
         return $this->mediaRepository->deleteMedia($media);
     }
 

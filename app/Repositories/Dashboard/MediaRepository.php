@@ -18,8 +18,8 @@ class MediaRepository
     {
         return Media::findOrFail($media_id);
     }
-    public function deleteMedia(Media $media)
+    public function deleteMedia(?Media $media)
     {
-        return $media->delete();
+        return $media?->delete();
     }
 }

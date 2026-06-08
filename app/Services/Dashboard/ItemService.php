@@ -61,12 +61,9 @@ class ItemService extends BaseService
 
         if ($request->hasFile('media')) {
 
-            // $item_details->media->each(function ($media) {
-            //     $this->mediaService->deleteMedia($media);
-            // });
-
-            $this->mediaService->deleteMedia($item_details->media);
-
+            if ($item_details->media) {
+                $this->mediaService->deleteMedia($item_details->media);
+            }
 
             $item_details->media()->create(
                 $this->mediaService->prepareMedia(
