@@ -142,14 +142,14 @@ class MediaService
             );
         }
 
-        $video_name = pathinfo(
-            $media_name,
-            PATHINFO_FILENAME
-        ) . '.mp4';
+        // $video_name = pathinfo(
+        //     $media_name,
+        //     PATHINFO_FILENAME
+        // ) . '.mp4';
 
-        $file->move($destination_path,$video_name);
+        $file->move($destination_path,$media_name);
 
-        return "documents/website_media/{$folder}/{$video_name}";
+        return "documents/website_media/{$folder}/{$media_name}";
     }
 
     protected function detectFileType(UploadedFile $file): string
