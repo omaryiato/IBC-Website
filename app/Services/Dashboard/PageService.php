@@ -80,9 +80,12 @@ class PageService extends BaseService
 
         if ($request->hasFile('media')) {
 
-            $page_details->media->each(function ($media) {
-                $this->mediaService->deleteMedia($media);
-            });
+            // $page_details->media->each(function ($media) {
+            //     $this->mediaService->deleteMedia($media);
+            // });
+
+            $this->mediaService->deleteMedia($page_details->media);
+
 
             $page_details->media()->create(
                 $this->mediaService->prepareMedia(

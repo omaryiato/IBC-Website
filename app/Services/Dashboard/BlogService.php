@@ -62,9 +62,11 @@ class BlogService extends BaseService
 
         if ($request->hasFile('media')) {
 
-            $blog_details->media->each(function ($media) {
-                $this->mediaService->deleteMedia($media);
-            });
+            // $blog_details->media->each(function ($media) {
+            //     $this->mediaService->deleteMedia($media);
+            // });
+
+            $this->mediaService->deleteMedia($blog_details->media);
 
             $blog_details->media()->create(
                 $this->mediaService->prepareMedia(

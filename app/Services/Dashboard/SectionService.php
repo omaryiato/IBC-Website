@@ -61,9 +61,11 @@ class SectionService extends BaseService
 
         if ($request->hasFile('media')) {
 
-            $section_details->media->each(function ($media) {
-                $this->mediaService->deleteMedia($media);
-            });
+            // $section_details->media->each(function ($media) {
+            //     $this->mediaService->deleteMedia($media);
+            // });
+
+            $this->mediaService->deleteMedia($section_details->media);
 
             $section_details->media()->create(
                 $this->mediaService->prepareMedia(
