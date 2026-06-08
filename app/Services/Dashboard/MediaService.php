@@ -177,8 +177,8 @@ class MediaService
 
     public function deleteMedia($media)
     {
-        if (File::exists(public_path($media->file_path))) {
-            File::delete(public_path($media->file_path));
+        if (File::exists(public_path($media?->file_path))) {
+            File::delete(public_path($media?->file_path));
         }
         return $this->mediaRepository->deleteMedia($media);
     }
@@ -197,7 +197,7 @@ class MediaService
                 400);
         }
 
-        $relativePath = ltrim($media_details->file_path, '/');
+        $relativePath = ltrim($media_details?->file_path, '/');
         $path = public_path($relativePath);
 
         if (!file_exists($path)) {
