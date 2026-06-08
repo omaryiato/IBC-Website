@@ -21,7 +21,7 @@ class SectionRepository
 
     public function addNewSection(array $section_request)
     {
-        $last_order = Section::max('sort_order');
+        $last_order = Section::where('section_code', $section_request['section_code'])->max('sort_order');
 
         $section_request['sort_order'] = $last_order + 1 ?? 0;
 

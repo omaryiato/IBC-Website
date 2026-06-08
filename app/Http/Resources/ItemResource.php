@@ -14,7 +14,7 @@ class ItemResource extends JsonResource
 
             'section_id' => $this->section_id,
 
-            'media_id' => $this->media_id,
+            // 'media_id' => $this->media_id,
 
             'type' => $this->type,
 
@@ -41,6 +41,11 @@ class ItemResource extends JsonResource
             'deleted_at' => $this->deleted_at?->format('Y-m-d H:i:s'),
 
             'item_media' => new MediaResource($this->whenLoaded('media')),
+            // 'item_media' => MediaResource::collection($this->whenLoaded('media')),
+
+            'stream_url' => str_starts_with($this->media?->mime_type, 'video/')
+            ? route('media.stream', $this->media?->id)
+            : null,
         ];
     }
 }

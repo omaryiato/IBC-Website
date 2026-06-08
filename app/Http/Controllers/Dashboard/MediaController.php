@@ -35,4 +35,9 @@ class MediaController extends Controller
     //     }
 
     // }
+
+    public function stream(int $id)
+    {
+        return $this->mediaService->stream($id);
+    }
 }

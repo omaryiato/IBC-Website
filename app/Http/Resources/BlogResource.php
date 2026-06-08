@@ -22,7 +22,7 @@ class BlogResource extends JsonResource
 
             'seo' => $this->seo,
 
-            'media_id' => $this->media_id,
+            // 'media_id' => $this->media_id,
 
             'is_published' => $this->is_published,
 
@@ -30,6 +30,11 @@ class BlogResource extends JsonResource
             'published_at' => $this->published_at?->format('Y-m-d H:i:s'),
 
             'blog_media' => new MediaResource($this->whenLoaded('media')),
+            // 'blog_media' => MediaResource::collection($this->whenLoaded('media')),
+
+            'stream_url' => str_starts_with($this->media?->mime_type, 'video/')
+            ? route('media.stream', $this->media?->id)
+            : null,
         ];
     }
 }

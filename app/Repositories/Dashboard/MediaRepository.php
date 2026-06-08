@@ -6,6 +6,7 @@ namespace App\Repositories\Dashboard;
 use App\Models\Media;
 use App\Repositories\Dashboard\BaseRepository;
 
+
 class MediaRepository
 {
     public function addNewMedia(array $media_request)
@@ -17,7 +18,7 @@ class MediaRepository
     {
         return Media::findOrFail($media_id);
     }
-    public function delete(Media $media)
+    public function deleteMedia(Media $media)
     {
         return $media->delete();
     }

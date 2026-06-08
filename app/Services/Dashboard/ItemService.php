@@ -32,39 +32,51 @@ class ItemService extends BaseService
     public function addNewItem($request)
     {
         $item_request = $request->all();
+
+        $item_details = $this->itemRepository->addNewItem($this->prepareItemDetails($item_request));
+
         if ($request->hasFile('media')) {
 
-            $media_id = $this->mediaService->prepareMedia($request->file('media'),'items');
+            $media_details = $this->mediaService->prepareMedia($request->file('media'),'items');
 
-            $item_request['media_id'] = $media_id;
+            $item_details->media()->create($media_details);
+
         }
-        return $this->itemRepository->addNewItem($this->prepareItemDetails($item_request));
+
+        return $item_details;
+        // return $item_details->load('media');
+
     }
 
     public function updateItem($request, int $id)
     {
-        $item_request = $request->all();
         $item_details = $this->itemRepository->getItemById($id);
 
         if (!$item_details) {
             return null;
         }
 
+        $this->itemRepository->updateItem($item_details,
+            $this->prepareItemDetails($request->all()));
+
         if ($request->hasFile('media')) {
 
-            if (!empty($item_details->media_id)) {
-                $this->mediaService->deleteMedia($item_details->media_id);
-            }
+            $item_details->media->each(function ($media) {
+                $this->mediaService->deleteMedia($media);
+            });
 
-            $media_id = $this->mediaService->prepareMedia($request->file('media'),'sections');
-
-            $item_request['media_id'] = $media_id;
-
+            $item_details->media()->create(
+                $this->mediaService->prepareMedia(
+                    $request->file('media'),
+                    'items'
+                )
+            );
         }
 
-        $item_request = $this->prepareItemDetails($item_request);
+        return $item_details->fresh();
+        // return $item_details->fresh()->load('media');
 
-        return $this->itemRepository->updateItem($item_details, $item_request);
+
     }
     public function deleteItem(int $id)
     {
@@ -91,7 +103,7 @@ class ItemService extends BaseService
                 ? json_decode($item_request['description'], true)
                 : null,
 
-            'media_id' => $item_request['media_id'] ?? null,
+            // 'media_id' => $item_request['media_id'] ?? null,
 
             'link' => $item_request['link'] ?? null,
 

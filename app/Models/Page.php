@@ -17,7 +17,7 @@ class Page extends Model
         'meta_description',
         'is_active',
         'page_code',
-        'media_id',
+        // 'media_id',
         'created_by',
         'updated_by',
     ];
@@ -36,8 +36,17 @@ class Page extends Model
         return $this->hasMany(Section::class);
     }
 
+    // public function media()
+    // {
+    //     return $this->belongsTo(Media::class, 'media_id');
+    // }
+
     public function media()
     {
-        return $this->belongsTo(Media::class, 'media_id');
+        return $this->morphOne(Media::class, 'mediaable');
     }
+    // public function media()
+    // {
+    //     return $this->morphMany(Media::class, 'mediaable');
+    // }
 }

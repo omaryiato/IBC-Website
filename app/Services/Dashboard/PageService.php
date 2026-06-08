@@ -49,22 +49,24 @@ class PageService extends BaseService
     {
         $page_request = $request->all();
 
+        $page_details = $this->pageRepository->addNewPage($this->preparePageDetails($page_request));
+
         if ($request->hasFile('media')) {
 
-            $media_id = $this->mediaService->prepareMedia(
+            $media_details = $this->mediaService->prepareMedia(
                 $request->file('media'),
                 'pages'
             );
 
-            $page_request['media_id'] = $media_id;
+            $page_details->media()->create($media_details);
         }
 
-        return $this->pageRepository->addNewPage($this->preparePageDetails($page_request));
+        return $page_details;
+        // return $page_details->load('media');
     }
 
     public function updatePage($request, int $id)
     {
-        $page_request = $request->all();
 
         $page_details = $this->pageRepository->getPageById($id);
 
@@ -72,22 +74,28 @@ class PageService extends BaseService
             return null;
         }
 
+        $this->pageRepository->updatePage(
+                            $page_details,
+                            $this->preparePageDetails($request->all()));
+
         if ($request->hasFile('media')) {
 
-            if (!empty($page_details->media_id)) {
-                $this->mediaService->deleteMedia($page_details->media_id);
-            }
+            $page_details->media->each(function ($media) {
+                $this->mediaService->deleteMedia($media);
+            });
 
-
-            $media_id = $this->mediaService->prepareMedia($request->file('media'),'pages');
-
-            $page_request['media_id'] = $media_id;
+            $page_details->media()->create(
+                $this->mediaService->prepareMedia(
+                    $request->file('media'),
+                    'pages'
+                )
+            );
 
         }
 
-        $page_request = $this->preparePageDetails($page_request);
-        return $this->pageRepository->updatePage($page_details, $page_request);
-        
+        return $page_details->fresh();
+        // return $blog_details->fresh()->load('media');
+
     }
     public function deletePage(int $id)
     {
@@ -106,7 +114,7 @@ class PageService extends BaseService
             'meta_description' => json_decode($page_request['meta_description'], true) ?? null,
             'is_active' => $page_request['is_active'] ?? 1,
             'page_code' => $page_request['page_code'],
-            'media_id' => $page_request['media_id'] ?? null,
+            // 'media_id' => $page_request['media_id'] ?? null,
         ];
 
         if (isset($page_request['created_by'])) {

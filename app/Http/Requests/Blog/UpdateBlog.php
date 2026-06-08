@@ -29,6 +29,7 @@ class UpdateBlog extends BaseRequest
             'slug' => 'required|string|max:255|unique:blogs,slug,' . $id,
 
             'title' => 'required',
+
             // 'title' => 'required|array',
 
             // 'excerpt' => 'nullable|array',

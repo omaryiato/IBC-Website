@@ -33,44 +33,49 @@ class SectionService extends BaseService
     {
         $section_request = $request->all();
 
+        $section_details = $this->sectionRepository->addNewSection($this->prepareSectionDetails($section_request));
+
         if ($request->hasFile('media')) {
 
-            $media_id = $this->mediaService->prepareMedia(
-                $request->file('media'),
-                'sections'
-            );
+            $media_details = $this->mediaService->prepareMedia($request->file('media'),'sections');
 
-            $section_request['media_id'] = $media_id;
+            $section_details->media()->create($media_details);
+
         }
 
-        return $this->sectionRepository->addNewSection($this->prepareSectionDetails($section_request));
+        return $section_details;
+        // return $blog_details->load('media');
     }
 
     public function updateSection($request, int $id)
     {
-        $section_request = $request->all();
         $section_details = $this->sectionRepository->getSectionById($id);
 
         if (!$section_details) {
             return null;
         }
 
+        $this->sectionRepository->updateSection($section_details,
+                                        $this->prepareSectionDetails($request->all()));
+
+
         if ($request->hasFile('media')) {
 
-            if (!empty($section_details->media_id)) {
-                $this->mediaService->deleteMedia($section_details->media_id);
-            }
+            $section_details->media->each(function ($media) {
+                $this->mediaService->deleteMedia($media);
+            });
 
-
-            $media_id = $this->mediaService->prepareMedia($request->file('media'),'sections');
-
-            $section_request['media_id'] = $media_id;
-
+            $section_details->media()->create(
+                $this->mediaService->prepareMedia(
+                    $request->file('media'),
+                    'sections'
+                )
+            );
         }
 
-        $section_request = $this->prepareSectionDetails($section_request);
+        return $section_details->fresh();
+        // return $section_details->fresh()->load('media');
 
-        return $this->sectionRepository->updateSection($section_details, $section_request);
     }
 
     public function deleteSection(int $id)
@@ -92,7 +97,7 @@ class SectionService extends BaseService
             'settings' => json_decode($section_request['settings'], true) ?? null,
             'sort_order' => $section_request['sort_order'] ?? 0,
             'section_code' => $section_request['section_code'],
-            'media_id' => $section_request['media_id'] ?? null,
+            // 'media_id' => $section_request['media_id'] ?? null,
         ];
 
         if (isset($section_request['created_by'])) {

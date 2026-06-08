@@ -16,7 +16,7 @@ class Blog extends Model
         'title',
         'excerpt',
         'content',
-        'media_id',
+        // 'media_id',
         'seo',
         'is_published',
         'published_at',
@@ -47,11 +47,19 @@ class Blog extends Model
         });
     }
 
+    // public function media()
+    // {
+    //     return $this->belongsTo(Media::class, 'media_id');
+    // }
+
     public function media()
     {
-        return $this->belongsTo(Media::class, 'media_id');
+        return $this->morphOne(Media::class, 'mediaable');
     }
-
+    // public function media()
+    // {
+    //     return $this->morphMany(Media::class, 'mediaable');
+    // }
     public function user()
     {
         return $this->belongsTo(User::class, 'created_by');

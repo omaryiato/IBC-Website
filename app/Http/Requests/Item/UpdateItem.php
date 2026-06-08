@@ -5,6 +5,8 @@ namespace App\Http\Requests\Item;
 use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class UpdateItem extends BaseRequest
 {
@@ -42,7 +44,15 @@ class UpdateItem extends BaseRequest
 
             'sort_order' => 'nullable|integer|min:0',
 
-            'item_code' => 'required|string|max:50|unique:items,item_code,' . $id,
+            'item_code' => [
+                'required',
+                'string',
+                'max:50',
+                Rule::unique('items', 'item_code')
+                    ->ignore($id)
+                    ->where('section_id', $this->input('section_id')),
+            ],
+
 
             'is_active' => 'nullable|in:0,1',
 

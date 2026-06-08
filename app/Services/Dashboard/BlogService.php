@@ -31,39 +31,53 @@ class BlogService extends BaseService
     public function addNewBlog($request)
     {
         $blog_request = $request->all();
+
+        $blog_details = $this->blogRepository->addNewBlog($this->prepareBlogDetails($blog_request));
+
         if ($request->hasFile('media')) {
 
-            $media_id = $this->mediaService->prepareMedia($request->file('media'),'blogs');
+            $media_details = $this->mediaService->prepareMedia($request->file('media'),'blogs');
 
-            $blog_request['media_id'] = $media_id;
+            $blog_details->media()->create($media_details);
+
         }
-        return $this->blogRepository->addNewBlog($this->prepareBlogDetails($blog_request));
+
+        return $blog_details;
+        // return $blog_details->load('media');
+
     }
 
     public function updateBlog($request, int $id)
     {
-        $blog_request = $request->all();
         $blog_details = $this->blogRepository->getBlogById($id);
 
         if (!$blog_details) {
             return null;
         }
 
+        $this->blogRepository->updateBlog(
+            $blog_details,
+            $this->prepareBlogDetails($request->all())
+        );
+
         if ($request->hasFile('media')) {
 
-            if (!empty($blog_details->media_id)) {
-                $this->mediaService->deleteMedia($blog_details->media_id);
-            }
+            $blog_details->media->each(function ($media) {
+                $this->mediaService->deleteMedia($media);
+            });
 
-            $media_id = $this->mediaService->prepareMedia($request->file('media'),'sections');
-
-            $blog_request['media_id'] = $media_id;
-
+            $blog_details->media()->create(
+                $this->mediaService->prepareMedia(
+                    $request->file('media'),
+                    'blogs'
+                )
+            );
         }
 
-        $blog_request = $this->prepareBlogDetails($blog_request);
-        return $this->blogRepository->updateBlog($blog_details, $blog_request);
+        return $blog_details->fresh();
+        // return $blog_details->fresh()->load('media');
     }
+
     public function deleteBlog(int $id)
     {
         $blog_details = $this->blogRepository->getBlogById($id);
@@ -93,7 +107,7 @@ class BlogService extends BaseService
                 ? json_decode($blog_request['seo'], true)
                 : null,
 
-            'media_id' => $blog_request['media_id'] ?? null,
+            // 'media_id' => $blog_request['media_id'] ?? null,
 
             'is_published' => $blog_request['is_published'] ?? 1,
 

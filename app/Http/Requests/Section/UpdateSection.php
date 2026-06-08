@@ -5,6 +5,8 @@ namespace App\Http\Requests\Section;
 use App\Http\Requests\Base\BaseRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 
 class UpdateSection extends BaseRequest
 {
@@ -41,7 +43,14 @@ class UpdateSection extends BaseRequest
             'sort_order' => 'nullable|integer|min:0',
             // 'sort_order' => 'nullable|integer|min:0|unique:sections,sort_order',
 
-            'section_code' => 'required|string|max:50|unique:sections,section_code,' . $id,
+            'section_code' => [
+                    'required',
+                    'string',
+                    'max:50',
+                    Rule::unique('sections', 'section_code')
+                        ->ignore($id)
+                        ->where('page_id', $this->input('page_id')),
+                ],
 
             'is_active' => 'nullable|in:0,1',
 

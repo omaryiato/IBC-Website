@@ -20,7 +20,7 @@ class Section extends Model
         'sort_order',
         'section_code',
         'is_active',
-        'media_id',
+        // 'media_id',
         'created_by',
         'updated_by',
     ];
@@ -40,10 +40,19 @@ class Section extends Model
         return $this->belongsTo(Page::class);
     }
 
+    // public function media()
+    // {
+    //     return $this->belongsTo(Media::class, 'media_id');
+    // }
+
     public function media()
     {
-        return $this->belongsTo(Media::class, 'media_id');
+        return $this->morphOne(Media::class, 'mediaable');
     }
+    // public function media()
+    // {
+    //     return $this->morphMany(Media::class, 'mediaable');
+    // }
 
     public function items()
     {

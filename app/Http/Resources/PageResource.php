@@ -31,8 +31,13 @@ class PageResource extends JsonResource
             'deleted_at' => $this->deleted_at?->format('Y-m-d H:i:s'),
 
             'page_media' => new MediaResource($this->whenLoaded('media')),
+            // 'page_media' => MediaResource::collection($this->whenLoaded('media')),
 
             'sections' => SectionResource::collection($this->whenLoaded('sections')),
+
+            'stream_url' => str_starts_with($this->media?->mime_type, 'video/')
+            ? route('media.stream', $this->media?->id)
+            : null,
         ];
     }
 }

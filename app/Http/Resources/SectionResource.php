@@ -14,7 +14,7 @@ class SectionResource extends JsonResource
 
             'page_id' => $this->page_id,
 
-            'media_id' => $this->media_id,
+            // 'media_id' => $this->media_id,
 
             'type' => $this->type,
 
@@ -39,8 +39,13 @@ class SectionResource extends JsonResource
             'deleted_at' => $this->deleted_at?->format('Y-m-d H:i:s'),
 
             'section_media' => new MediaResource($this->whenLoaded('media')),
+            // 'section_media' => MediaResource::collection($this->whenLoaded('media')),
 
             'items' => ItemResource::collection($this->whenLoaded('items')),
+
+            'stream_url' => str_starts_with($this->media?->mime_type, 'video/')
+            ? route('media.stream', $this->media?->id)
+            : null,
         ];
     }
 }

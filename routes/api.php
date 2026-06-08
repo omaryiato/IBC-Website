@@ -182,9 +182,9 @@ Route::group(['prefix' => 'website'], function () {
         |--------------------------------------------------------------------------
         */
 
-        Route::apiResource(
-            'contact-message',
-            ContactMessageController::class
-        );
+        Route::apiResource('contact-message',ContactMessageController::class);
+
+        Route::get('/media/{id}/stream', [MediaController::class, 'stream'])->name('media.stream');
+
     });
 // });

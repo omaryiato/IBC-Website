@@ -2,39 +2,78 @@
 
 namespace App\Services\Dashboard;
 
+use App\Helpers\ResponseHelper;
 use App\Repositories\Dashboard\MediaRepository;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Intervention\Image\Format;
+use Intervention\Image\Laravel\Facades\Image;
+
 
 class MediaService
 {
+
+
     public function __construct(
         protected MediaRepository $mediaRepository
     ) {}
 
-    public function prepareMedia(UploadedFile $file, string $folder = 'website_media'): int
+    public function prepareMedia(UploadedFile $file, string $folder = 'website_media')
     {
         $media_name = $this->generateMediaName($file);
 
         $original_name = $file->getClientOriginalName();
         $mime_type     = $file->getMimeType();
         $file_size     = $file->getSize();
-        $file_type     = $this->detectFileType($file);
+        // $file_type     = $this->detectFileType($file);
 
-        $media_path = $this->uploadMediaFile($file, $media_name, $folder);
+        // $media_path = $this->uploadMediaFile($file, $media_name, $folder);
 
+        $file_type = $this->detectFileType($file);
 
+        if ($file_type === 'image') {
 
-        $media_details = $this->mediaRepository->addNewMedia([
-            'file_name'     => $media_name,
-            'original_name' => $original_name,
-            'file_path'     => $media_path,
-            'file_type'     => $file_type,
-            'mime_type'     => $mime_type,
-            'file_size'     => $file_size,
-        ]);
-        return $media_details['id'];
+            $media_path = $this->uploadImage(
+                $file,
+                $media_name,
+                $folder
+            );
+
+        } elseif ($file_type === 'video') {
+
+            $media_path = $this->uploadVideo(
+                $file,
+                $media_name,
+                $folder
+            );
+
+        } else {
+
+            $media_path = $this->uploadFile(
+                $file,
+                $media_name,
+                $folder
+            );
+        }
+
+        // $media_details = $this->mediaRepository->addNewMedia([
+        //     'file_name'     => $media_name,
+        //     'original_name' => $original_name,
+        //     'file_path'     => $media_path,
+        //     'file_type'     => $file_type,
+        //     'mime_type'     => $mime_type,
+        //     'file_size'     => $file_size,
+        // ]);
+
+        return [
+                'file_name'     => $media_name,
+                'original_name' => $original_name,
+                'file_path'     => $media_path,
+                'file_type'     => $file_type,
+                'mime_type'     => $mime_type,
+                'file_size'     => $file_size,
+            ];
     }
 
     protected function generateMediaName(UploadedFile $file): string
@@ -53,7 +92,7 @@ class MediaService
         return "{$original_name}_{$date}.{$extension}";
     }
 
-    protected function uploadMediaFile(UploadedFile $file,string $media_name,string $folder): string
+    protected function uploadFile(UploadedFile $file,string $media_name,string $folder): string
     {
         $destination_path = public_path("documents/website_media/{$folder}");
 
@@ -64,6 +103,53 @@ class MediaService
         $file->move($destination_path, $media_name);
 
         return "documents/website_media/{$folder}/{$media_name}";
+    }
+
+    protected function uploadImage(UploadedFile $file,string $media_name,string $folder): string
+    {
+        $destination_path = public_path("documents/website_media/{$folder}");
+
+        if (!File::exists($destination_path)) {
+            File::makeDirectory($destination_path, 0755, true);
+        }
+
+        $webp_name = pathinfo($media_name, PATHINFO_FILENAME) . '.webp';
+
+        $image = Image::decode($file);
+
+        // encode to webp
+        $encoded = $image->encodeUsingFormat(
+            Format::WEBP,
+            quality: 85
+        );
+
+        // save encoded image
+        $encoded->save("{$destination_path}/{$webp_name}");
+
+        return "documents/website_media/{$folder}/{$webp_name}";
+    }
+
+    protected function uploadVideo(UploadedFile $file, string $media_name, string $folder): string
+    {
+
+        $destination_path = public_path("documents/website_media/{$folder}");
+
+        if (!File::exists($destination_path)) {
+            File::makeDirectory(
+                $destination_path,
+                0755,
+                true
+            );
+        }
+
+        $video_name = pathinfo(
+            $media_name,
+            PATHINFO_FILENAME
+        ) . '.mp4';
+
+        $file->move($destination_path,$video_name);
+
+        return "documents/website_media/{$folder}/{$video_name}";
     }
 
     protected function detectFileType(UploadedFile $file): string
@@ -78,21 +164,103 @@ class MediaService
             return 'video';
         }
 
-        if (str_contains($mime, 'pdf')) {
+        if (
+            str_contains($mime, 'pdf')
+            || str_contains($mime, 'word')
+            || str_contains($mime, 'sheet')
+        ) {
             return 'document';
         }
 
         return 'file';
     }
 
-    public function deleteMedia(int $media_id)
+    public function deleteMedia($media)
     {
-        $media = $this->mediaRepository->findById($media_id);
+        if (File::exists(public_path($media->file_path))) {
+            File::delete(public_path($media->file_path));
+        }
+        return $this->mediaRepository->deleteMedia($media);
+    }
 
-        if ($media && File::exists(public_path($media['file_path']))) {
-            File::delete(public_path($media['file_path']));
+    public function stream(int $id)
+    {
+        $media_details = $this->mediaRepository->findById($id);
+
+        if (!str_starts_with($media_details->mime_type, 'video/')) {
+            return ResponseHelper::error(
+                $media_details,
+                [
+                    'en' => "This file is not a video",
+                    'ar' => "This file is not a video",
+                ],
+                400);
         }
 
-        return $this->mediaRepository->delete($media);
+        $relativePath = ltrim($media_details->file_path, '/');
+        $path = public_path($relativePath);
+
+        if (!file_exists($path)) {
+            return ResponseHelper::error(
+                $path,
+                [
+                    'en' => "File not found on disk: $path",
+                    'ar' => "File not found on disk: $path",
+                ],
+                400);
+        }
+
+        $size     = filesize($path);
+        $mimeType = $media_details->mime_type;
+
+        if (request()->hasHeader('Range')) {
+            return $this->handleRangeRequest($path, $size, $mimeType);
+        }
+
+        return response()->stream(function () use ($path) {
+            $stream = fopen($path, 'rb');
+            while (!feof($stream)) {
+                echo fread($stream, 65536);
+                flush();
+            }
+            fclose($stream);
+        }, 200, [
+            'Content-Type'   => $mimeType,
+            'Content-Length' => $size,
+            'Accept-Ranges'  => 'bytes',
+            'Cache-Control'  => 'no-cache',
+        ]);
+    }
+
+    private function handleRangeRequest(string $path, int $size, string $mimeType)
+    {
+        preg_match('/bytes=(\d+)-(\d*)/', request()->header('Range'), $matches);
+
+        $start = (int) $matches[1];
+        $end   = isset($matches[2]) && $matches[2] !== ''
+                    ? (int) $matches[2]
+                    : $size - 1;
+
+        $chunkSize = $end - $start + 1;
+
+        return response()->stream(function () use ($path, $start, $chunkSize) {
+            $stream = fopen($path, 'rb');
+            fseek($stream, $start);
+            $remaining = $chunkSize;
+
+            while (!feof($stream) && $remaining > 0) {
+                $toRead = min(65536, $remaining);
+                echo fread($stream, $toRead);
+                $remaining -= $toRead;
+                flush();
+            }
+
+            fclose($stream);
+        }, 206, [
+            'Content-Type'   => $mimeType,
+            'Content-Range'  => "bytes $start-$end/$size",
+            'Content-Length' => $chunkSize,
+            'Accept-Ranges'  => 'bytes',
+        ]);
     }
 }
