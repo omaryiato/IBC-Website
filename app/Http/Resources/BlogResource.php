@@ -33,8 +33,8 @@ class BlogResource extends JsonResource
             // 'blog_media' => MediaResource::collection($this->whenLoaded('media')),
 
             'stream_url' => str_starts_with($this->media?->mime_type, 'video/')
-            ? ltrim(parse_url(route('media.stream', $this->media?->id), PHP_URL_PATH), '/')
-            : null,
+                ? preg_replace('#(?<!:)//+#', '/', route('media.stream', $this->media?->id))
+                : null,
         ];
     }
 }
