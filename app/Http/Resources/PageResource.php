@@ -22,6 +22,8 @@ class PageResource extends JsonResource
 
             "page_code" => $this->page_code,
 
+            "sort_order" => $this->sort_order,
+
             'created_by' => $this->created_by,
 
             'updated_by' => $this->updated_by,
