@@ -14,7 +14,11 @@ class PageResource extends JsonResource
 
             'slug' => $this->slug,
 
+            'title' => $this->title ?? null,
+
             'meta_title' => $this->meta_title,
+
+            'description' => $this->description ?? null,
 
             'meta_description' => $this->meta_description,
 
@@ -38,7 +42,7 @@ class PageResource extends JsonResource
             'sections' => SectionResource::collection($this->whenLoaded('sections')),
 
             'stream_url' => str_starts_with($this->media?->mime_type, 'video/')
-            ? route('media.stream', $this->media?->id)
+            ? str_replace('//', '/', route('media.stream', $this->media?->id))
             : null,
         ];
     }

@@ -86,6 +86,7 @@ return [
 
     'get_pages_list'   => 'Pages list successfully retrieved.',
     'page_not_found'   => 'Page does not exist.',
+    'media_not_found'   => 'Media does not exist.',
     'get_page_details' => 'Page details successfully retrieved.',
 
     'add_new_page'     => 'Page added successfully.',

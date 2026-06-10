@@ -13,7 +13,9 @@ class Page extends Model
 
     protected $fillable = [
         'slug',
+        'title',
         'meta_title',
+        'description',
         'meta_description',
         'is_active',
         'page_code',
@@ -23,7 +25,9 @@ class Page extends Model
     ];
 
     protected $casts = [
+        'title' => 'array',
         'meta_title' => 'array',
+        'description' => 'array',
         'meta_description' => 'array',
         'is_active' => 'integer',
         'created_at' => 'datetime',

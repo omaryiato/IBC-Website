@@ -195,6 +195,10 @@ class MediaService
     {
         $media_details = $this->mediaRepository->findById($id);
 
+        if(!$media_details){
+            return false;
+        }
+
         if (!str_starts_with($media_details->mime_type, 'video/')) {
             return ResponseHelper::error(
                 $media_details,

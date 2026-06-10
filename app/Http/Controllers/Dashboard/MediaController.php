@@ -38,6 +38,18 @@ class MediaController extends Controller
 
     public function stream(int $id)
     {
-        return $this->mediaService->stream($id);
+        $media_details = $this->mediaService->stream($id);
+
+        if(!$media_details){
+            return ResponseHelper::error(
+                    $media_details,
+                    [
+                        'en' => trans('validation.media_not_found'),
+                        'ar' => trans('validation.media_not_found'),
+                    ],
+                    404);
+        }
+
+        return $media_details;
     }
 }

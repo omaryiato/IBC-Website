@@ -44,7 +44,7 @@ class SectionResource extends JsonResource
             'items' => ItemResource::collection($this->whenLoaded('items')),
 
             'stream_url' => str_starts_with($this->media?->mime_type, 'video/')
-            ? route('media.stream', $this->media?->id)
+            ? str_replace('//', '/', route('media.stream', $this->media?->id))
             : null,
         ];
     }
