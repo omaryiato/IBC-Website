@@ -81,7 +81,7 @@
                                     Subject
                                 </td>
                                 <td style="padding:14px;color:#475569;border-bottom:1px solid #e2e8f0;">
-                                    {!! nl2br(e($message_details->message)) !!}
+                                    {!! nl2br(e($message_details->subject)) !!}
                                 </td>
                             </tr>
                             @endif
