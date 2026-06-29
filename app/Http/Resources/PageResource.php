@@ -14,11 +14,11 @@ class PageResource extends JsonResource
 
             'slug' => $this->slug,
 
-            'title' => $this->title ?? null,
+            // 'title' => $this->title ?? null,
 
             'meta_title' => $this->meta_title,
 
-            'description' => $this->description ?? null,
+            // 'description' => $this->description ?? null,
 
             'meta_description' => $this->meta_description,
 

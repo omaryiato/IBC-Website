@@ -113,9 +113,9 @@ class PageService extends BaseService
     {
         $data =  [
             'slug' => $page_request['slug'],
-            'title' => json_decode($page_request['title'], true) ?? null,
+            // 'title' => json_decode($page_request['title'], true) ?? null,
             'meta_title' => json_decode($page_request['meta_title'], true) ?? null,
-            'description' => json_decode($page_request['description'], true) ?? null,
+            // 'description' => json_decode($page_request['description'], true) ?? null,
             'meta_description' => json_decode($page_request['meta_description'], true) ?? null,
             'is_active' => $page_request['is_active'] ?? 1,
             'page_code' => $page_request['page_code'],
