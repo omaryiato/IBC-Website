@@ -99,7 +99,7 @@ class SectionService extends BaseService
             'settings' => json_decode($section_request['settings'], true) ?? null,
             'sort_order' => $section_request['sort_order'] ?? 0,
             'section_code' => $section_request['section_code'],
-            'is_active' => $page_request['is_active'] ?? 1,
+            'is_active' => $section_request['is_active'] ?? 1,
             // 'media_id' => $section_request['media_id'] ?? null,
         ];
 
