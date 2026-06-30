@@ -22,7 +22,8 @@ class JobApplicationHelper
             $view_name = 'emails.job_application';
             $subject = 'Job Applications: New Job Application';
 
-            $email_address = 'oalkhateeb1710@gmail.com';
+            $email_address = 'info@beveconsult.com';
+            // $email_address = 'oalkhateeb1710@gmail.com';
             // $email_address = 'o.bsharat@beveconsult.com';
             // $email_address = $email_ditals['mail_to'];
 

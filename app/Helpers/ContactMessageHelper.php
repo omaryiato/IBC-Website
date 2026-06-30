@@ -22,7 +22,8 @@ class ContactMessageHelper
             $view_name = 'emails.contact_message';
             $subject = 'Contact Messages: New Message';
 
-            $email_address = 'oalkhateeb1710@gmail.com';
+            // $email_address = 'oalkhateeb1710@gmail.com';
+            $email_address = 'info@beveconsult.com';
             // $email_address = 'o.bsharat@beveconsult.com';
             // $email_address = $email_ditals['mail_to'];
 
