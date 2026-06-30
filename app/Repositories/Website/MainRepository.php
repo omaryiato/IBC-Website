@@ -36,7 +36,9 @@ class MainRepository
 
     public function getActiveCareersList()
     {
-        return Career::where('is_active', 1)->get();
+        return Career::where('is_active', 1)
+            ->where('deadline', '>=', now())
+            ->get();
     }
 
     public function ApplyJobApplication(array $application_request)
