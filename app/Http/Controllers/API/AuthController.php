@@ -11,24 +11,72 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    // public function login(Login $request)
+    // {
+
+    //     $user_details = User::where('email', $request->email)
+    //                     ->where('is_active', 1)
+    //                     ->first();
+
+    //     if (!$user_details) {
+    //         return ResponseHelper::error(
+    //                 null,
+    //                 [
+    //                     'en' => trans('validation.invalid_credentials'),
+    //                     'ar' => trans('validation.invalid_credentials'),
+    //                 ],
+    //                 401);
+    //     }
+
+    //     if ($request->password !== $user_details->password) {
+    //         return ResponseHelper::error(
+    //             null,
+    //             [
+    //                 'en' => trans('validation.invalid_credentials'),
+    //                 'ar' => trans('validation.invalid_credentials'),
+    //             ],
+    //             401
+    //         );
+    //     }
+
+    //     // if (!Hash::check($request->password, $user_details->password)) {
+
+    //     //     return ResponseHelper::error(
+    //     //             null,
+    //     //             [
+    //     //                 'en' => trans('validation.invalid_credentials'),
+    //     //                 'ar' => trans('validation.invalid_credentials'),
+    //     //             ],
+    //     //             401);
+    //     // }
+
+    //     $token = $user_details->createToken('auth_token')->plainTextToken;
+
+    //     return ResponseHelper::success(
+    //             $user_details,
+    //             [
+    //                 'en' => trans('validation.logged_in'),
+    //                 'ar' => trans('validation.logged_in'),
+    //                 'token' => $token,
+    //             ],
+    //             200
+    //         );
+    // }
+
     public function login(Login $request)
     {
+        $users = User::all();
 
+foreach ($users as $user) {
+    $user->password = Hash::make($user->password);
+    $user->save();
+}
+return true;
         $user_details = User::where('email', $request->email)
-                        ->where('is_active', 1)
-                        ->first();
+            ->where('is_active', 1)
+            ->first();
 
         if (!$user_details) {
-            return ResponseHelper::error(
-                    null,
-                    [
-                        'en' => trans('validation.invalid_credentials'),
-                        'ar' => trans('validation.invalid_credentials'),
-                    ],
-                    401);
-        }
-
-        if ($request->password !== $user_details->password) {
             return ResponseHelper::error(
                 null,
                 [
@@ -39,28 +87,34 @@ class AuthController extends Controller
             );
         }
 
-        // if (!Hash::check($request->password, $user_details->password)) {
+        if (!Hash::check($request->password, $user_details->password)) {
+            return ResponseHelper::error(
+                null,
+                [
+                    'en' => trans('validation.invalid_credentials'),
+                    'ar' => trans('validation.invalid_credentials'),
+                ],
+                401
+            );
+        }
 
-        //     return ResponseHelper::error(
-        //             null,
-        //             [
-        //                 'en' => trans('validation.invalid_credentials'),
-        //                 'ar' => trans('validation.invalid_credentials'),
-        //             ],
-        //             401);
-        // }
+        $tokenResult = $user_details->createToken('auth_token');
 
-        $token = $user_details->createToken('auth_token')->plainTextToken;
+        $tokenResult->accessToken->expires_at = now()->addHours(10);
+        $tokenResult->accessToken->save();
+
+        $token = $tokenResult->plainTextToken;
 
         return ResponseHelper::success(
-                $user_details,
-                [
-                    'en' => trans('validation.logged_in'),
-                    'ar' => trans('validation.logged_in'),
-                    'token' => $token,
-                ],
-                200
-            );
+            $user_details,
+            [
+                'en' => trans('validation.logged_in'),
+                'ar' => trans('validation.logged_in'),
+                'token' => $token,
+                'expires_at' => $tokenResult->accessToken->expires_at,
+            ],
+            200
+        );
     }
 
     public function logout(Request $request)
