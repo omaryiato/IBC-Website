@@ -97,11 +97,11 @@ Route::group(['prefix' => 'website'], function () {
 });
 
 
-// Route::middleware([
-//     'auth:sanctum',
-//     'admin.access',
-//     'audit'
-// ])->group(function () {
+Route::middleware([
+    'auth:sanctum',
+    'admin.access',
+    'audit'
+])->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
 
@@ -163,10 +163,7 @@ Route::group(['prefix' => 'website'], function () {
         |--------------------------------------------------------------------------
         */
 
-        Route::apiResource(
-            'career-application',
-            CareerApplicationController::class
-        );
+        Route::apiResource('career-application',CareerApplicationController::class);
 
         /*
         |--------------------------------------------------------------------------
@@ -187,4 +184,4 @@ Route::group(['prefix' => 'website'], function () {
         Route::get('/media/{id}/stream', [MediaController::class, 'stream'])->name('media.stream');
 
     });
-// });
+});
