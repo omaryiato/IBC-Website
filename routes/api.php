@@ -106,8 +106,8 @@ Route::middleware([
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/refresh', [AuthController::class, 'refresh']);
- });
- 
+});
+
     Route::prefix('dashboard')->group(function () {
 
         /*
