@@ -65,13 +65,7 @@ class AuthController extends Controller
 
     public function login(Login $request)
     {
-        $users = User::all();
 
-foreach ($users as $user) {
-    $user->password = Hash::make($user->password);
-    $user->save();
-}
-return true;
         $user_details = User::where('email', $request->email)
             ->where('is_active', 1)
             ->first();
