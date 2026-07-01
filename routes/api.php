@@ -106,7 +106,8 @@ Route::middleware([
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('/refresh', [AuthController::class, 'refresh']);
-
+ });
+ 
     Route::prefix('dashboard')->group(function () {
 
         /*
@@ -184,4 +185,4 @@ Route::middleware([
         Route::get('/media/{id}/stream', [MediaController::class, 'stream'])->name('media.stream');
 
     });
-});
+// });
