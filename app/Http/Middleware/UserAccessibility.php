@@ -12,8 +12,9 @@ class UserAccessibility
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) {
+        $user = $request->user();
 
+        if (!$user) {
             return ResponseHelper::error(
                 null,
                 [
@@ -24,17 +25,16 @@ class UserAccessibility
             );
         }
 
-        if (Auth::user()->user_type !== 'admin') {
-
-            return ResponseHelper::error(
-                null,
-                [
-                    'en' => trans('validation.unauthorized'),
-                    'ar' => trans('validation.unauthorized'),
-                ],
-                403
-            );
-        }
+        // if ($user->user_type !== 'admin') {
+        //     return ResponseHelper::error(
+        //         null,
+        //         [
+        //             'en' => trans('validation.unauthorized'),
+        //             'ar' => trans('validation.unauthorized'),
+        //         ],
+        //         403
+        //     );
+        // }
 
         return $next($request);
     }
