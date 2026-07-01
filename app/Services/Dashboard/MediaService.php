@@ -209,7 +209,7 @@ class MediaService
                 400);
         }
 
-        $relativePath = ltrim($media_details?->file_path, '/');
+        $relativePath = ltrim('api/'.$media_details?->file_path, '/');
         $path = public_path($relativePath);
 
         if (!file_exists($path)) {
