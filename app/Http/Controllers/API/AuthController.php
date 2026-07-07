@@ -91,12 +91,23 @@ class AuthController extends Controller
             );
         }
 
+        // Delete all previous tokens
+        $user_details->tokens()->delete();
+
+        // Create new token
         $tokenResult = $user_details->createToken('auth_token');
 
         $tokenResult->accessToken->expires_at = now()->addHours(10);
         $tokenResult->accessToken->save();
 
         $token = $tokenResult->plainTextToken;
+
+        // $tokenResult = $user_details->createToken('auth_token');
+
+        // $tokenResult->accessToken->expires_at = now()->addHours(10);
+        // $tokenResult->accessToken->save();
+
+        // $token = $tokenResult->plainTextToken;
 
         return ResponseHelper::success(
             $user_details,
