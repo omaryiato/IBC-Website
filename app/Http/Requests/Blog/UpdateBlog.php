@@ -37,7 +37,7 @@ class UpdateBlog extends BaseRequest
             'content' => 'required',
             // 'content' => 'required|array',
 
-            'media' => 'nullable|file|mimes:jpg,jpeg,png,webp|max:300240',
+            'media' => 'nullable|file|mimes:jpg,jpeg,png,webp,mp4|max:300240',
 
             // 'seo' => 'nullable|array',
 
